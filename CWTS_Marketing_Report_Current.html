@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CWTS Marketing Dashboard</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --p:#6f275f;--p2:#9a3d88;--p10:#f9f1f8;--p30:#e6c8e1;
+  --n:#0f1751;--n10:#eaecf5;
+  --t:#0d5d6d;--t10:#eef6f8;--t30:#b3d7de;
+  --g:#777;--w:#fff;--bg:#fff;--bg2:#f8f8f8;
+  --txt:#1a1a1a;--txt2:#555;--bdr:rgba(0,0,0,.1);
+  --font:'DM Sans',sans-serif;--mono:'DM Mono',monospace;
+}
+body{font-family:var(--font);background:var(--bg);color:var(--txt);font-size:14px;line-height:1.5;padding:0}
+.dash{padding:2rem 1.5rem;max-width:1200px;margin:0 auto}
+.top-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:2rem;flex-wrap:wrap;gap:.75rem;padding-bottom:1.25rem;border-bottom:2px solid var(--p)}
+.logo-mark{display:flex;align-items:center;gap:.75rem}
+.logo-diamond{width:38px;height:38px;background:var(--p);transform:rotate(45deg);border-radius:4px;flex-shrink:0}
+.logo-text{font-size:13px;font-weight:600;color:var(--p);letter-spacing:.02em;line-height:1.3}
+.logo-text span{display:block;font-weight:400;color:var(--g);font-size:11px;letter-spacing:.03em}
+.period-badge{background:var(--p10);color:var(--p);font-size:11px;font-weight:600;padding:5px 14px;border-radius:20px;border:1px solid var(--p30);font-family:var(--mono)}
+.section-label{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--g);margin:1.5rem 0 .75rem}
+.rag-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:.75rem;margin-bottom:.5rem}
+.rag-card{background:var(--bg);border:1px solid var(--bdr);border-radius:10px;padding:1rem 1.1rem;position:relative;overflow:hidden}
+.rag-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.rag-card.on-track::before{background:#1d9e75}
+.rag-card.monitor::before{background:#ba7517}
+.rag-card.review::before{background:#a32d2d}
+.rag-card.nodata::before{background:var(--g)}
+.rag-label{font-size:11px;color:var(--txt2);margin-bottom:.4rem;font-weight:500}
+.rag-value{font-size:22px;font-weight:600;font-family:var(--mono);letter-spacing:-.02em}
+.rag-value.on-track{color:#0f6e56}
+.rag-value.monitor{color:#854f0b}
+.rag-value.review{color:#a32d2d}
+.rag-value.nodata{color:var(--g)}
+.rag-meta{font-size:10px;margin-top:.35rem;color:var(--g)}
+.rag-pill{display:inline-block;font-size:9px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:2px 8px;border-radius:10px;margin-top:.4rem}
+.rag-pill.on-track{background:#eaf3de;color:#3b6d11}
+.rag-pill.monitor{background:#faeeda;color:#854f0b}
+.rag-pill.review{background:#fcebeb;color:#a32d2d}
+.rag-pill.nodata{background:var(--bg2);color:var(--g)}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:.5rem}
+@media(max-width:700px){.two-col{grid-template-columns:1fr}}
+.card{background:var(--bg);border:1px solid var(--bdr);border-radius:10px;padding:1.1rem 1.25rem}
+.card-title{font-size:12px;font-weight:600;color:var(--txt);margin-bottom:.85rem;display:flex;align-items:center;gap:.5rem}
+.card-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.chart-wrap{position:relative;width:100%}
+.platform-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.75rem;margin-bottom:.5rem}
+.plat-card{background:var(--bg2);border-radius:8px;padding:.85rem 1rem;border:1px solid var(--bdr)}
+.plat-name{font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--n);margin-bottom:.6rem;padding-bottom:.5rem;border-bottom:2px solid var(--p)}
+.plat-row{display:flex;justify-content:space-between;align-items:baseline;padding:3px 0;font-size:12px}
+.plat-metric{color:var(--txt2)}
+.plat-val{font-weight:600;color:var(--txt);font-family:var(--mono)}
+.plat-bar-wrap{height:3px;background:rgba(0,0,0,.1);border-radius:2px;margin:.6rem 0 .2rem}
+.plat-bar{height:3px;border-radius:2px}
+.campaign-wrap{overflow-x:auto;margin-bottom:.5rem}
+table.ct{width:100%;border-collapse:collapse;font-size:12px;min-width:640px}
+table.ct th{text-align:left;padding:.5rem .75rem;font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--g);border-bottom:2px solid var(--bdr);white-space:nowrap}
+table.ct td{padding:.65rem .75rem;border-bottom:1px solid var(--bdr);vertical-align:middle}
+table.ct tr:last-child td{border-bottom:none}
+table.ct tr:hover td{background:var(--p10)}
+.pill{display:inline-block;font-size:9px;font-weight:700;letter-spacing:.04em;padding:3px 9px;border-radius:10px;white-space:nowrap}
+.win{background:#eaf3de;color:#3b6d11}
+.ok{background:var(--n10);color:var(--n)}
+.loss{background:#fcebeb;color:#a32d2d}
+.mc-box{background:var(--p10);border:1px solid var(--p30);border-radius:10px;padding:1.25rem 1.4rem;margin-bottom:.5rem}
+.mc-header{display:flex;align-items:center;gap:.75rem;margin-bottom:.85rem}
+.mc-avatar{width:32px;height:32px;border-radius:50%;background:var(--p);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#fff;flex-shrink:0;letter-spacing:.05em}
+.mc-name{font-size:13px;font-weight:600;color:var(--p)}
+.mc-sub{font-size:11px;color:var(--g)}
+.mc-summary{font-size:13px;color:var(--txt);line-height:1.7;margin-bottom:.85rem}
+.mc-summary strong{color:var(--p);font-weight:600}
+.mc-action{display:flex;align-items:flex-start;gap:.6rem;padding:.4rem 0;border-top:1px solid var(--p30);font-size:12px;color:var(--txt2);line-height:1.5}
+.mc-num{min-width:18px;height:18px;border-radius:50%;background:var(--p);color:#fff;font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.legend{display:flex;gap:14px;font-size:11px;color:var(--g);margin-top:8px;flex-wrap:wrap}
+.legend span{display:flex;align-items:center;gap:5px}
+.lsq{width:10px;height:10px;border-radius:2px;display:inline-block}
+.lln{width:18px;height:2px;display:inline-block}
+.divider{height:1px;background:var(--bdr);margin:1.75rem 0}
+.footer{display:flex;justify-content:space-between;align-items:center;font-size:10px;color:var(--g);flex-wrap:wrap;gap:.5rem;padding-top:1rem;border-top:1px solid var(--bdr)}
+.footer strong{color:var(--p)}
+</style>
+</head>
+<body>
+<div class="dash">
+
+  <div class="top-bar">
+    <div class="logo-mark">
+      <div class="logo-diamond"></div>
+      <div class="logo-text">COAST WIDE TRAINING SOLUTIONS<span>Monthly Marketing Dashboard</span></div>
+    </div>
+    <div class="period-badge" id="period-badge">LOADING...</div>
+  </div>
+
+  <div class="section-label">Revenue — KPI Status</div>
+  <div class="rag-grid" id="rag-grid"></div>
+
+  <div class="section-label">Platform Performance</div>
+  <div class="platform-grid" id="platform-grid"></div>
+
+  <div class="two-col">
+    <div class="card">
+      <div class="card-title"><div class="card-dot" style="background:var(--p)"></div>Revenue vs target (rolling 7 months)</div>
+      <div class="chart-wrap" style="height:210px"><canvas id="revenueChart"></canvas></div>
+      <div class="legend" id="rev-legend"></div>
+    </div>
+    <div class="card">
+      <div class="card-title"><div class="card-dot" style="background:var(--t)"></div>Channel reach this month</div>
+      <div class="chart-wrap" style="height:210px"><canvas id="reachChart"></canvas></div>
+    </div>
+  </div>
+
+  <div class="section-label">Campaign Breakdown — what worked, what didn't</div>
+  <div class="card campaign-wrap">
+    <table class="ct" id="campaign-table">
+      <thead><tr>
+        <th>Campaign</th><th>Channel</th><th>Reach</th><th>Clicks / Opens</th><th>Conversions</th><th>Revenue</th><th>Result</th>
+      </tr></thead>
+      <tbody id="campaign-tbody"></tbody>
+    </table>
+  </div>
+
+  <div class="section-label">MC's Analysis & Recommendations</div>
+  <div class="mc-box" id="mc-box"></div>
+
+  <div class="divider"></div>
+  <div class="footer">
+    <span><strong>CWTS Marketing Claude</strong> — generated report. All content requires team review before external distribution.</span>
+    <span id="gen-date"></span>
+  </div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+/* ─────────────────────────────────────────────────────────
+   DATA OBJECT — MC populates this section each month.
+   Replace everything between the DATA = { and the closing }
+   with the new month's data. Do not change anything else.
+───────────────────────────────────────────────────────── */
+const DATA = {
+  period: "April 2026",
+  generatedBy: "Marketing Claude",
+  rag: [
+    { label: "Product sales — Wix",      value: "$8,420",  target: "$11,667", status: "review",   pct: 72  },
+    { label: "Product sales — Vetr",     value: "$980",    target: "$1,250",  status: "monitor",  pct: 78  },
+    { label: "Course enrolments",        value: "$5,200",  target: "$6,667",  status: "monitor",  pct: 78  },
+    { label: "Total sales (month)",      value: "$14,600", target: "$19,583", status: "review",   pct: 75  },
+    { label: "Google Ads spend",         value: "$280",    target: "$280",    status: "on-track", pct: 100 },
+    { label: "Email open rate",          value: "38%",     target: "30%",     status: "on-track", pct: 100 }
+  ],
+  platforms: [
+    { name: "LinkedIn",       metrics: [["Impressions","4,820"],["Clicks","312"],["Followers","1,104"],["Eng. rate","3.2%"]], bar: 0.64, color: "#0f1751" },
+    { name: "Facebook",       metrics: [["Reach","2,940"],["Engagements","187"],["Followers","834"],["CTR","1.8%"]],         bar: 0.42, color: "#6f275f" },
+    { name: "Instagram",      metrics: [["Reach","3,110"],["Engagements","294"],["Followers","612"],["Saves","48"]],         bar: 0.51, color: "#0d5d6d" },
+    { name: "Wix / Website",  metrics: [["Sessions","1,820"],["Shop visits","440"],["Conversions","31"],["Conv. rate","7.0%"]], bar: 0.70, color: "#0f1751" },
+    { name: "Google organic", metrics: [["Clicks","890"],["Impressions","9,200"],["Avg position","14.2"],["CTR","0.97%"]],  bar: 0.38, color: "#0d5d6d" }
+  ],
+  revenueMonths:  ["Oct","Nov","Dec","Jan","Feb","Mar","Apr"],
+  revenueActual:  [18200, 21400, 14800, 16100, 17300, 19800, 14600],
+  revenueTarget:  [19583, 19583, 19583, 19583, 19583, 19583, 19583],
+  reachData: {
+    labels: ["LinkedIn","Facebook","Instagram","Google Ads","Email"],
+    values: [4820, 2940, 3110, 1240, 5600],
+    colors: ["#0f1751","#6f275f","#0d5d6d","#3d8b9e","#9a3d88"]
+  },
+  campaigns: [
+    { name: "TLI41225 product email",  channel: "Email",      reach: "5,600 sent",   clicks: "1,820 opens (32.5%)", conv: "14 purchases",  rev: "$2,800", result: "win"  },
+    { name: "VET Foundations course",  channel: "Email",      reach: "5,600 sent",   clicks: "1,344 opens (24%)",   conv: "6 enrolments",  rev: "$3,000", result: "ok"   },
+    { name: "QMS Pack spotlight",      channel: "LinkedIn",   reach: "2,140 imp.",   clicks: "88 clicks (4.1%)",    conv: "3 purchases",   rev: "$420",   result: "ok"   },
+    { name: "Compliance Corner post",  channel: "LinkedIn",   reach: "1,820 imp.",   clicks: "142 clicks (7.8%)",   conv: "0",             rev: "—",      result: "ok"   },
+    { name: "Product Reel — QMS",      channel: "Instagram",  reach: "1,890 reach",  clicks: "62 saves",            conv: "0 tracked",     rev: "—",      result: "ok"   },
+    { name: "Google Ads — RTO QMS",    channel: "Google Ads", reach: "4,200 imp.",   clicks: "118 clicks",          conv: "2 purchases",   rev: "$560",   result: "loss" },
+    { name: "Wix shop homepage",       channel: "Website",    reach: "440 shop visits", clicks: "180 PDP views",    conv: "31 purchases",  rev: "$7,140", result: "win"  }
+  ],
+  mc: {
+    summary: "April came in at <strong>75% of revenue target</strong> — the Wix shop is the standout performer but product email is carrying most of the conversion load. Google Ads is burning $280/month for 2 conversions ($140 CPC vs $200 AOV — that is underwater). EOFY is 8 weeks out and the campaign needs to be live in 3 weeks.",
+    actions: [
+      "Pause or restructure Google Ads immediately — current CPC is not profitable. Redirect $280 to SEO blog content targeting 'RTO QMS pack' and 'RTO compliance documents'.",
+      "EOFY campaign brief due by 15 April — 3-email sequence, 35% off full catalogue, tax deductible angle, social content across all platforms.",
+      "Push VET Foundations harder on LinkedIn — open rate is healthy (24%) but conversion is low. Test a stronger CTA and a QMS bundle offer.",
+      "Instagram saves are not converting — add a 'link in bio' CTA, update bio link to Wix shop, and test a product Reel with a direct price offer.",
+      "Confirm aX Day stall collateral brief — print run is August, design needs to be finalised by end of May."
+    ]
+  }
+};
+/* ───────────────── end of DATA — do not edit below ───────────────── */
+
+document.getElementById('period-badge').textContent = DATA.period.toUpperCase();
+document.getElementById('gen-date').textContent = 'Generated: ' + new Date().toLocaleDateString('en-AU', { day:'numeric', month:'long', year:'numeric' });
+
+const ragGrid = document.getElementById('rag-grid');
+const ragLabels = { 'on-track':'On track', monitor:'Monitor', review:'Review', nodata:'No data' };
+DATA.rag.forEach(r => {
+  const d = document.createElement('div');
+  d.className = 'rag-card ' + r.status;
+  d.innerHTML = `<div class="rag-label">${r.label}</div><div class="rag-value ${r.status}">${r.value}</div><div class="rag-meta">Target: ${r.target}</div><span class="rag-pill ${r.status}">${ragLabels[r.status]}</span>`;
+  ragGrid.appendChild(d);
+});
+
+const platGrid = document.getElementById('platform-grid');
+DATA.platforms.forEach(pl => {
+  const d = document.createElement('div');
+  d.className = 'plat-card';
+  const rows = pl.metrics.map(([m,v]) => `<div class="plat-row"><span class="plat-metric">${m}</span><span class="plat-val">${v}</span></div>`).join('');
+  d.innerHTML = `<div class="plat-name">${pl.name}</div>${rows}<div class="plat-bar-wrap"><div class="plat-bar" style="width:${Math.round(pl.bar*100)}%;background:${pl.color}"></div></div><div style="font-size:9px;color:var(--g);margin-top:2px">${Math.round(pl.bar*100)}% of benchmark</div>`;
+  platGrid.appendChild(d);
+});
+
+const tbody = document.getElementById('campaign-tbody');
+DATA.campaigns.forEach(c => {
+  const cls = c.result === 'win' ? 'win' : c.result === 'loss' ? 'loss' : 'ok';
+  const lbl = c.result === 'win' ? 'Working' : c.result === 'loss' ? 'Underperforming' : 'Steady';
+  const tr = document.createElement('tr');
+  tr.innerHTML = `<td style="font-weight:500">${c.name}</td><td style="color:var(--g)">${c.channel}</td><td>${c.reach}</td><td>${c.clicks}</td><td>${c.conv}</td><td style="font-family:var(--mono);font-weight:500">${c.rev}</td><td><span class="pill ${cls}">${lbl}</span></td>`;
+  tbody.appendChild(tr);
+});
+
+const mcBox = document.getElementById('mc-box');
+const actHtml = DATA.mc.actions.map((a,i) => `<div class="mc-action"><div class="mc-num">${i+1}</div><span>${a}</span></div>`).join('');
+mcBox.innerHTML = `<div class="mc-header"><div class="mc-avatar">MC</div><div><div class="mc-name">Marketing Claude — Monthly Analysis</div><div class="mc-sub">${DATA.period} · ${DATA.generatedBy}</div></div></div><div class="mc-summary">${DATA.mc.summary}</div><div>${actHtml}</div>`;
+
+const revCanvas = document.getElementById('revenueChart');
+new Chart(revCanvas, {
+  type: 'bar',
+  data: {
+    labels: DATA.revenueMonths,
+    datasets: [
+      { label: 'Actual',  data: DATA.revenueActual, backgroundColor: '#6f275f', borderRadius: 4, order: 2 },
+      { label: 'Target',  data: DATA.revenueTarget, type: 'line', borderColor: '#0d5d6d', borderWidth: 2, pointRadius: 0, tension: .4, fill: false, order: 1 }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => '$' + ctx.parsed.y.toLocaleString() } } },
+    scales: {
+      x: { grid: { display: false }, ticks: { font: { size: 11 }, color: '#777' } },
+      y: { grid: { color: 'rgba(0,0,0,.05)' }, ticks: { font: { size: 11 }, color: '#777', callback: v => '$' + Math.round(v/1000) + 'k' } }
+    }
+  }
+});
+document.getElementById('rev-legend').innerHTML = '<span><span class="lsq" style="background:#6f275f"></span>Actual</span><span><span class="lln" style="background:#0d5d6d"></span>Target</span>';
+
+new Chart(document.getElementById('reachChart'), {
+  type: 'bar',
+  data: {
+    labels: DATA.reachData.labels,
+    datasets: [{ data: DATA.reachData.values, backgroundColor: DATA.reachData.colors, borderRadius: 4 }]
+  },
+  options: {
+    indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => ctx.parsed.x.toLocaleString() + ' reach/impressions' } } },
+    scales: {
+      x: { grid: { color: 'rgba(0,0,0,.05)' }, ticks: { font: { size: 11 }, color: '#777', callback: v => v >= 1000 ? Math.round(v/1000) + 'k' : v } },
+      y: { grid: { display: false }, ticks: { font: { size: 11 }, color: '#777' } }
+    }
+  }
+});
+</script>
+</body>
+</html>
