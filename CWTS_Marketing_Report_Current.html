@@ -3,263 +3,667 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CWTS Marketing Dashboard</title>
+<title>CWTS Marketing Dashboard — March 2026</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap');
-*{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --p:#6f275f;--p2:#9a3d88;--p10:#f9f1f8;--p30:#e6c8e1;
-  --n:#0f1751;--n10:#eaecf5;
-  --t:#0d5d6d;--t10:#eef6f8;--t30:#b3d7de;
-  --g:#777;--w:#fff;--bg:#fff;--bg2:#f8f8f8;
-  --txt:#1a1a1a;--txt2:#555;--bdr:rgba(0,0,0,.1);
-  --font:'DM Sans',sans-serif;--mono:'DM Mono',monospace;
+:root {
+  --purple: #6f275f;
+  --navy: #0f1751;
+  --teal: #0d5d6d;
+  --grey: #777777;
+  --light: #f4f4f7;
+  --mid: #e2e2ea;
+  --white: #ffffff;
+  --green: #1a7a4a;
+  --amber: #c47d00;
+  --red: #b52a2a;
+  --green-bg: #eaf5ef;
+  --amber-bg: #fffaed;
+  --red-bg: #fdf0f0;
+  --grey-bg: #f0f0f4;
 }
-body{font-family:var(--font);background:var(--bg);color:var(--txt);font-size:14px;line-height:1.5;padding:0}
-.dash{padding:2rem 1.5rem;max-width:1200px;margin:0 auto}
-.top-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:2rem;flex-wrap:wrap;gap:.75rem;padding-bottom:1.25rem;border-bottom:2px solid var(--p)}
-.logo-mark{display:flex;align-items:center;gap:.75rem}
-.logo-diamond{width:38px;height:38px;background:var(--p);transform:rotate(45deg);border-radius:4px;flex-shrink:0}
-.logo-text{font-size:13px;font-weight:600;color:var(--p);letter-spacing:.02em;line-height:1.3}
-.logo-text span{display:block;font-weight:400;color:var(--g);font-size:11px;letter-spacing:.03em}
-.period-badge{background:var(--p10);color:var(--p);font-size:11px;font-weight:600;padding:5px 14px;border-radius:20px;border:1px solid var(--p30);font-family:var(--mono)}
-.section-label{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--g);margin:1.5rem 0 .75rem}
-.rag-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:.75rem;margin-bottom:.5rem}
-.rag-card{background:var(--bg);border:1px solid var(--bdr);border-radius:10px;padding:1rem 1.1rem;position:relative;overflow:hidden}
-.rag-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
-.rag-card.on-track::before{background:#1d9e75}
-.rag-card.monitor::before{background:#ba7517}
-.rag-card.review::before{background:#a32d2d}
-.rag-card.nodata::before{background:var(--g)}
-.rag-label{font-size:11px;color:var(--txt2);margin-bottom:.4rem;font-weight:500}
-.rag-value{font-size:22px;font-weight:600;font-family:var(--mono);letter-spacing:-.02em}
-.rag-value.on-track{color:#0f6e56}
-.rag-value.monitor{color:#854f0b}
-.rag-value.review{color:#a32d2d}
-.rag-value.nodata{color:var(--g)}
-.rag-meta{font-size:10px;margin-top:.35rem;color:var(--g)}
-.rag-pill{display:inline-block;font-size:9px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:2px 8px;border-radius:10px;margin-top:.4rem}
-.rag-pill.on-track{background:#eaf3de;color:#3b6d11}
-.rag-pill.monitor{background:#faeeda;color:#854f0b}
-.rag-pill.review{background:#fcebeb;color:#a32d2d}
-.rag-pill.nodata{background:var(--bg2);color:var(--g)}
-.two-col{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:.5rem}
-@media(max-width:700px){.two-col{grid-template-columns:1fr}}
-.card{background:var(--bg);border:1px solid var(--bdr);border-radius:10px;padding:1.1rem 1.25rem}
-.card-title{font-size:12px;font-weight:600;color:var(--txt);margin-bottom:.85rem;display:flex;align-items:center;gap:.5rem}
-.card-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
-.chart-wrap{position:relative;width:100%}
-.platform-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.75rem;margin-bottom:.5rem}
-.plat-card{background:var(--bg2);border-radius:8px;padding:.85rem 1rem;border:1px solid var(--bdr)}
-.plat-name{font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--n);margin-bottom:.6rem;padding-bottom:.5rem;border-bottom:2px solid var(--p)}
-.plat-row{display:flex;justify-content:space-between;align-items:baseline;padding:3px 0;font-size:12px}
-.plat-metric{color:var(--txt2)}
-.plat-val{font-weight:600;color:var(--txt);font-family:var(--mono)}
-.plat-bar-wrap{height:3px;background:rgba(0,0,0,.1);border-radius:2px;margin:.6rem 0 .2rem}
-.plat-bar{height:3px;border-radius:2px}
-.campaign-wrap{overflow-x:auto;margin-bottom:.5rem}
-table.ct{width:100%;border-collapse:collapse;font-size:12px;min-width:640px}
-table.ct th{text-align:left;padding:.5rem .75rem;font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--g);border-bottom:2px solid var(--bdr);white-space:nowrap}
-table.ct td{padding:.65rem .75rem;border-bottom:1px solid var(--bdr);vertical-align:middle}
-table.ct tr:last-child td{border-bottom:none}
-table.ct tr:hover td{background:var(--p10)}
-.pill{display:inline-block;font-size:9px;font-weight:700;letter-spacing:.04em;padding:3px 9px;border-radius:10px;white-space:nowrap}
-.win{background:#eaf3de;color:#3b6d11}
-.ok{background:var(--n10);color:var(--n)}
-.loss{background:#fcebeb;color:#a32d2d}
-.mc-box{background:var(--p10);border:1px solid var(--p30);border-radius:10px;padding:1.25rem 1.4rem;margin-bottom:.5rem}
-.mc-header{display:flex;align-items:center;gap:.75rem;margin-bottom:.85rem}
-.mc-avatar{width:32px;height:32px;border-radius:50%;background:var(--p);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#fff;flex-shrink:0;letter-spacing:.05em}
-.mc-name{font-size:13px;font-weight:600;color:var(--p)}
-.mc-sub{font-size:11px;color:var(--g)}
-.mc-summary{font-size:13px;color:var(--txt);line-height:1.7;margin-bottom:.85rem}
-.mc-summary strong{color:var(--p);font-weight:600}
-.mc-action{display:flex;align-items:flex-start;gap:.6rem;padding:.4rem 0;border-top:1px solid var(--p30);font-size:12px;color:var(--txt2);line-height:1.5}
-.mc-num{min-width:18px;height:18px;border-radius:50%;background:var(--p);color:#fff;font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
-.legend{display:flex;gap:14px;font-size:11px;color:var(--g);margin-top:8px;flex-wrap:wrap}
-.legend span{display:flex;align-items:center;gap:5px}
-.lsq{width:10px;height:10px;border-radius:2px;display:inline-block}
-.lln{width:18px;height:2px;display:inline-block}
-.divider{height:1px;background:var(--bdr);margin:1.75rem 0}
-.footer{display:flex;justify-content:space-between;align-items:center;font-size:10px;color:var(--g);flex-wrap:wrap;gap:.5rem;padding-top:1rem;border-top:1px solid var(--bdr)}
-.footer strong{color:var(--p)}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--light); color: var(--navy); font-size: 13px; }
+
+/* HEADER */
+.header { background: var(--navy); padding: 24px 32px; display: flex; justify-content: space-between; align-items: center; }
+.header-left h1 { color: #fff; font-size: 20px; font-weight: 700; letter-spacing: 0.3px; }
+.header-left p { color: #9ca8cc; font-size: 12px; margin-top: 3px; }
+.header-right { text-align: right; }
+.period-badge { background: var(--purple); color: #fff; padding: 5px 14px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.5px; display: inline-block; }
+.generated { color: #9ca8cc; font-size: 10px; margin-top: 5px; }
+
+/* AWARDS BANNER */
+.awards-banner { background: linear-gradient(135deg, var(--purple), #9e3a8a); padding: 12px 32px; display: flex; align-items: center; gap: 12px; }
+.awards-banner .trophy { font-size: 20px; }
+.awards-banner p { color: #fff; font-size: 12px; font-weight: 600; }
+.awards-banner span { font-weight: 400; opacity: 0.9; }
+
+/* SECTION TITLES */
+.section-title { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px; color: var(--grey); padding: 18px 32px 8px; }
+
+/* LAYOUT GRIDS */
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; padding: 0 32px; }
+.grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; padding: 0 32px; }
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 0 32px; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; padding: 0 32px; }
+
+/* RAG CARDS */
+.rag-card { background: var(--white); border-radius: 8px; padding: 16px; border-left: 4px solid var(--grey); }
+.rag-card.green { border-left-color: var(--green); background: var(--green-bg); }
+.rag-card.amber { border-left-color: var(--amber); background: var(--amber-bg); }
+.rag-card.red { border-left-color: var(--red); background: var(--red-bg); }
+.rag-card.nodata { border-left-color: #ccc; background: var(--grey-bg); }
+.rag-card .label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: var(--grey); margin-bottom: 6px; }
+.rag-card .actual { font-size: 22px; font-weight: 700; color: var(--navy); line-height: 1.1; }
+.rag-card .target { font-size: 11px; color: var(--grey); margin-top: 3px; }
+.rag-card .pct { font-size: 11px; font-weight: 600; margin-top: 3px; }
+.rag-card.green .pct { color: var(--green); }
+.rag-card.amber .pct { color: var(--amber); }
+.rag-card.red .pct { color: var(--red); }
+.pill { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 10px; font-weight: 700; margin-top: 6px; }
+.pill-green { background: #c8f0d8; color: var(--green); }
+.pill-amber { background: #fde9b0; color: var(--amber); }
+.pill-red { background: #f5c8c8; color: var(--red); }
+.pill-grey { background: #e0e0e8; color: var(--grey); }
+.pill-note { background: #dce8ff; color: #2255aa; }
+
+/* PLATFORM CARDS */
+.platform-card { background: var(--white); border-radius: 8px; padding: 16px; }
+.platform-header { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1px solid var(--mid); }
+.platform-icon { width: 28px; height: 28px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; color: white; flex-shrink: 0; }
+.icon-li { background: #0a66c2; }
+.icon-fb { background: #1877f2; }
+.icon-ig { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #bc1888); }
+.icon-wix { background: var(--purple); }
+.icon-g { background: var(--teal); }
+.icon-bt { background: var(--navy); }
+.platform-name { font-size: 12px; font-weight: 700; color: var(--navy); }
+.metric-row { display: flex; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid var(--light); }
+.metric-row:last-child { border-bottom: none; }
+.metric-row .ml { color: var(--grey); font-size: 11px; }
+.metric-row .mv { font-weight: 600; font-size: 12px; color: var(--navy); }
+.metric-row .mv.up { color: var(--green); }
+.metric-row .mv.down { color: var(--red); }
+
+/* CAMPAIGN TABLE */
+.campaign-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+.campaign-table th { background: var(--navy); color: #fff; padding: 8px 12px; text-align: left; font-size: 10px; font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase; }
+.campaign-table td { padding: 8px 12px; border-bottom: 1px solid var(--mid); color: var(--navy); }
+.campaign-table tr:last-child td { border-bottom: none; }
+.campaign-table tr:nth-child(even) td { background: var(--light); }
+.badge { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 10px; font-weight: 700; }
+.badge-green { background: #c8f0d8; color: var(--green); }
+.badge-amber { background: #fde9b0; color: var(--amber); }
+.badge-red { background: #f5c8c8; color: var(--red); }
+.badge-grey { background: #e0e0e8; color: var(--grey); }
+
+/* HOURS CARD */
+.hours-card { background: var(--white); border-radius: 8px; padding: 20px; }
+.hours-bar-bg { background: var(--mid); border-radius: 4px; height: 10px; margin: 8px 0; }
+.hours-bar-fill { background: var(--red); border-radius: 4px; height: 10px; }
+.hours-bar-fill.amber { background: var(--amber); }
+.hours-row { display: flex; justify-content: space-between; align-items: center; padding: 5px 0; border-bottom: 1px solid var(--light); font-size: 12px; }
+.hours-row:last-child { border-bottom: none; }
+
+/* ANALYSIS SECTION */
+.analysis-box { background: var(--white); border-radius: 8px; padding: 24px; border-left: 4px solid var(--purple); }
+.analysis-box h3 { color: var(--purple); font-size: 13px; font-weight: 700; margin-bottom: 14px; text-transform: uppercase; letter-spacing: 0.8px; }
+.analysis-box p { color: #333; font-size: 13px; line-height: 1.65; margin-bottom: 12px; }
+.analysis-box p:last-child { margin-bottom: 0; }
+.action-list { list-style: none; counter-reset: actions; }
+.action-list li { counter-increment: actions; display: flex; gap: 12px; margin-bottom: 10px; font-size: 13px; line-height: 1.55; color: #333; }
+.action-list li::before { content: counter(actions); background: var(--purple); color: #fff; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+.risk-box { background: var(--red-bg); border: 1px solid #e8aaaa; border-radius: 6px; padding: 12px 16px; margin-top: 12px; font-size: 12px; color: #7a2020; line-height: 1.55; }
+.risk-box strong { display: block; margin-bottom: 4px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; }
+
+/* PENDING NOTE */
+.pending-note { background: #dce8ff; border: 1px solid #b0c8f0; border-radius: 6px; padding: 10px 14px; font-size: 12px; color: #2255aa; margin: 12px 32px 0; }
+
+/* FOOTER */
+.footer { text-align: center; padding: 20px 32px; color: var(--grey); font-size: 11px; margin-top: 24px; border-top: 1px solid var(--mid); }
+
+.spacer { height: 6px; }
+.spacer-lg { height: 16px; }
 </style>
 </head>
 <body>
-<div class="dash">
 
-  <div class="top-bar">
-    <div class="logo-mark">
-      <div class="logo-diamond"></div>
-      <div class="logo-text">COAST WIDE TRAINING SOLUTIONS<span>Monthly Marketing Dashboard</span></div>
-    </div>
-    <div class="period-badge" id="period-badge">LOADING...</div>
+<!-- HEADER -->
+<div class="header">
+  <div class="header-left">
+    <h1>Coast Wide Training Solutions</h1>
+    <p>Marketing Performance Dashboard — MC Analysis</p>
+  </div>
+  <div class="header-right">
+    <div class="period-badge">March 2026</div>
+    <div class="generated">Generated: 1 April 2026</div>
+  </div>
+</div>
+
+<!-- AWARDS BANNER -->
+<div class="awards-banner">
+  <div class="trophy">🏆</div>
+  <p>Australian VET Conference 2026 &nbsp;·&nbsp; <span>Instructional Design Excellence Award &amp; Outstanding Contribution to Vocational Education and Training Award</span></p>
+</div>
+
+<!-- PENDING NOTE -->
+<div class="pending-note">
+  ⏳ <strong>Vetr RCTI pending:</strong> March Vetr product sales not yet received. The $504 visible in Xero is February cash. Vetr product KPI shows as Pending — update when RCTI arrives.
+</div>
+
+<!-- ─── REVENUE KPIs ─── -->
+<div class="section-title">Revenue KPIs — FY2027 Tracking</div>
+<div class="grid-4">
+
+  <div class="rag-card nodata">
+    <div class="label">Product Sales — Wix Shop</div>
+    <div class="actual">$1,503</div>
+    <div class="target">FY2027 Target: $140,000 &nbsp;|&nbsp; Monthly pace: ~$11,667</div>
+    <div class="pct">13% of monthly pace</div>
+    <span class="pill pill-red">⚠ Review</span>
+    <div style="font-size:10px;color:var(--grey);margin-top:6px;">Wix shop + Stripe. Easter 10% sale active all month.</div>
   </div>
 
-  <div class="section-label">Revenue — KPI Status</div>
-  <div class="rag-grid" id="rag-grid"></div>
-
-  <div class="section-label">Platform Performance</div>
-  <div class="platform-grid" id="platform-grid"></div>
-
-  <div class="two-col">
-    <div class="card">
-      <div class="card-title"><div class="card-dot" style="background:var(--p)"></div>Revenue vs target (rolling 7 months)</div>
-      <div class="chart-wrap" style="height:210px"><canvas id="revenueChart"></canvas></div>
-      <div class="legend" id="rev-legend"></div>
-    </div>
-    <div class="card">
-      <div class="card-title"><div class="card-dot" style="background:var(--t)"></div>Channel reach this month</div>
-      <div class="chart-wrap" style="height:210px"><canvas id="reachChart"></canvas></div>
-    </div>
+  <div class="rag-card nodata">
+    <div class="label">Product Sales — Vetr</div>
+    <div class="actual">Pending</div>
+    <div class="target">FY2027 Target: $15,000 &nbsp;|&nbsp; Monthly pace: ~$1,250</div>
+    <div class="pct">RCTI outstanding</div>
+    <span class="pill pill-grey">⏳ No Data</span>
+    <div style="font-size:10px;color:var(--grey);margin-top:6px;">$504 in Xero = Feb cash. Exclude until RCTI received.</div>
   </div>
 
-  <div class="section-label">Campaign Breakdown — what worked, what didn't</div>
-  <div class="card campaign-wrap">
-    <table class="ct" id="campaign-table">
-      <thead><tr>
-        <th>Campaign</th><th>Channel</th><th>Reach</th><th>Clicks / Opens</th><th>Conversions</th><th>Revenue</th><th>Result</th>
-      </tr></thead>
-      <tbody id="campaign-tbody"></tbody>
-    </table>
+  <div class="rag-card amber">
+    <div class="label">Course Enrolments</div>
+    <div class="actual">$511</div>
+    <div class="target">FY2027 Target: $80,000 &nbsp;|&nbsp; Monthly pace: ~$6,667</div>
+    <div class="pct">8% of monthly pace</div>
+    <span class="pill pill-red">⚠ Review</span>
+    <div style="font-size:10px;color:var(--grey);margin-top:6px;">Booking Times cash received. AC/CC programs not yet live.</div>
   </div>
 
-  <div class="section-label">MC's Analysis & Recommendations</div>
-  <div class="mc-box" id="mc-box"></div>
-
-  <div class="divider"></div>
-  <div class="footer">
-    <span><strong>CWTS Marketing Claude</strong> — generated report. All content requires team review before external distribution.</span>
-    <span id="gen-date"></span>
+  <div class="rag-card green">
+    <div class="label">Consulting Revenue</div>
+    <div class="actual">$96,615</div>
+    <div class="target">Total business target: $1,050,000 &nbsp;|&nbsp; Monthly pace: ~$87,500</div>
+    <div class="pct">+10.4% above monthly pace</div>
+    <span class="pill pill-green">✓ On Track</span>
+    <div style="font-size:10px;color:var(--grey);margin-top:6px;">Strong month. Cash basis includes K&T $10K settlement.</div>
   </div>
 
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
-<script>
-/* ─────────────────────────────────────────────────────────
-   DATA OBJECT — MC populates this section each month.
-   Replace everything between the DATA = { and the closing }
-   with the new month's data. Do not change anything else.
-───────────────────────────────────────────────────────── */
-const DATA = {
-  period: "April 2026",
-  generatedBy: "Marketing Claude",
-  rag: [
-    { label: "Product sales — Wix",      value: "$8,420",  target: "$11,667", status: "review",   pct: 72  },
-    { label: "Product sales — Vetr",     value: "$980",    target: "$1,250",  status: "monitor",  pct: 78  },
-    { label: "Course enrolments",        value: "$5,200",  target: "$6,667",  status: "monitor",  pct: 78  },
-    { label: "Total sales (month)",      value: "$14,600", target: "$19,583", status: "review",   pct: 75  },
-    { label: "Google Ads spend",         value: "$280",    target: "$280",    status: "on-track", pct: 100 },
-    { label: "Email open rate",          value: "38%",     target: "30%",     status: "on-track", pct: 100 }
-  ],
-  platforms: [
-    { name: "LinkedIn",       metrics: [["Impressions","4,820"],["Clicks","312"],["Followers","1,104"],["Eng. rate","3.2%"]], bar: 0.64, color: "#0f1751" },
-    { name: "Facebook",       metrics: [["Reach","2,940"],["Engagements","187"],["Followers","834"],["CTR","1.8%"]],         bar: 0.42, color: "#6f275f" },
-    { name: "Instagram",      metrics: [["Reach","3,110"],["Engagements","294"],["Followers","612"],["Saves","48"]],         bar: 0.51, color: "#0d5d6d" },
-    { name: "Wix / Website",  metrics: [["Sessions","1,820"],["Shop visits","440"],["Conversions","31"],["Conv. rate","7.0%"]], bar: 0.70, color: "#0f1751" },
-    { name: "Google organic", metrics: [["Clicks","890"],["Impressions","9,200"],["Avg position","14.2"],["CTR","0.97%"]],  bar: 0.38, color: "#0d5d6d" }
-  ],
-  revenueMonths:  ["Oct","Nov","Dec","Jan","Feb","Mar","Apr"],
-  revenueActual:  [18200, 21400, 14800, 16100, 17300, 19800, 14600],
-  revenueTarget:  [19583, 19583, 19583, 19583, 19583, 19583, 19583],
-  reachData: {
-    labels: ["LinkedIn","Facebook","Instagram","Google Ads","Email"],
-    values: [4820, 2940, 3110, 1240, 5600],
-    colors: ["#0f1751","#6f275f","#0d5d6d","#3d8b9e","#9a3d88"]
-  },
-  campaigns: [
-    { name: "TLI41225 product email",  channel: "Email",      reach: "5,600 sent",   clicks: "1,820 opens (32.5%)", conv: "14 purchases",  rev: "$2,800", result: "win"  },
-    { name: "VET Foundations course",  channel: "Email",      reach: "5,600 sent",   clicks: "1,344 opens (24%)",   conv: "6 enrolments",  rev: "$3,000", result: "ok"   },
-    { name: "QMS Pack spotlight",      channel: "LinkedIn",   reach: "2,140 imp.",   clicks: "88 clicks (4.1%)",    conv: "3 purchases",   rev: "$420",   result: "ok"   },
-    { name: "Compliance Corner post",  channel: "LinkedIn",   reach: "1,820 imp.",   clicks: "142 clicks (7.8%)",   conv: "0",             rev: "—",      result: "ok"   },
-    { name: "Product Reel — QMS",      channel: "Instagram",  reach: "1,890 reach",  clicks: "62 saves",            conv: "0 tracked",     rev: "—",      result: "ok"   },
-    { name: "Google Ads — RTO QMS",    channel: "Google Ads", reach: "4,200 imp.",   clicks: "118 clicks",          conv: "2 purchases",   rev: "$560",   result: "loss" },
-    { name: "Wix shop homepage",       channel: "Website",    reach: "440 shop visits", clicks: "180 PDP views",    conv: "31 purchases",  rev: "$7,140", result: "win"  }
-  ],
-  mc: {
-    summary: "April came in at <strong>75% of revenue target</strong> — the Wix shop is the standout performer but product email is carrying most of the conversion load. Google Ads is burning $280/month for 2 conversions ($140 CPC vs $200 AOV — that is underwater). EOFY is 8 weeks out and the campaign needs to be live in 3 weeks.",
-    actions: [
-      "Pause or restructure Google Ads immediately — current CPC is not profitable. Redirect $280 to SEO blog content targeting 'RTO QMS pack' and 'RTO compliance documents'.",
-      "EOFY campaign brief due by 15 April — 3-email sequence, 35% off full catalogue, tax deductible angle, social content across all platforms.",
-      "Push VET Foundations harder on LinkedIn — open rate is healthy (24%) but conversion is low. Test a stronger CTA and a QMS bundle offer.",
-      "Instagram saves are not converting — add a 'link in bio' CTA, update bio link to Wix shop, and test a product Reel with a direct price offer.",
-      "Confirm aX Day stall collateral brief — print run is August, design needs to be finalised by end of May."
-    ]
-  }
-};
-/* ───────────────── end of DATA — do not edit below ───────────────── */
+<div class="spacer"></div>
+<div class="grid-4" style="padding-top:8px;">
 
-document.getElementById('period-badge').textContent = DATA.period.toUpperCase();
-document.getElementById('gen-date').textContent = 'Generated: ' + new Date().toLocaleDateString('en-AU', { day:'numeric', month:'long', year:'numeric' });
+  <div class="rag-card green">
+    <div class="label">Total Business Revenue (Mar)</div>
+    <div class="actual">$99,133</div>
+    <div class="target">Monthly pace to $1,050,000: ~$87,500</div>
+    <div class="pct">+13.3% above pace</div>
+    <span class="pill pill-green">✓ On Track</span>
+  </div>
 
-const ragGrid = document.getElementById('rag-grid');
-const ragLabels = { 'on-track':'On track', monitor:'Monitor', review:'Review', nodata:'No data' };
-DATA.rag.forEach(r => {
-  const d = document.createElement('div');
-  d.className = 'rag-card ' + r.status;
-  d.innerHTML = `<div class="rag-label">${r.label}</div><div class="rag-value ${r.status}">${r.value}</div><div class="rag-meta">Target: ${r.target}</div><span class="rag-pill ${r.status}">${ragLabels[r.status]}</span>`;
-  ragGrid.appendChild(d);
-});
+  <div class="rag-card red">
+    <div class="label">Total Product + Course (Mar)</div>
+    <div class="actual">$2,014</div>
+    <div class="target">Monthly pace to $235,000: ~$19,583</div>
+    <div class="pct">10% of monthly pace — 90% below target</div>
+    <span class="pill pill-red">⚠ Review</span>
+  </div>
 
-const platGrid = document.getElementById('platform-grid');
-DATA.platforms.forEach(pl => {
-  const d = document.createElement('div');
-  d.className = 'plat-card';
-  const rows = pl.metrics.map(([m,v]) => `<div class="plat-row"><span class="plat-metric">${m}</span><span class="plat-val">${v}</span></div>`).join('');
-  d.innerHTML = `<div class="plat-name">${pl.name}</div>${rows}<div class="plat-bar-wrap"><div class="plat-bar" style="width:${Math.round(pl.bar*100)}%;background:${pl.color}"></div></div><div style="font-size:9px;color:var(--g);margin-top:2px">${Math.round(pl.bar*100)}% of benchmark</div>`;
-  platGrid.appendChild(d);
-});
+  <div class="rag-card amber">
+    <div class="label">Google Ads Spend (Mar)</div>
+    <div class="actual">$305</div>
+    <div class="target">Monthly budget: ~$417 &nbsp;|&nbsp; Annual: $5,000</div>
+    <div class="pct">73% of budget used</div>
+    <span class="pill pill-green">✓ Within Budget</span>
+  </div>
 
-const tbody = document.getElementById('campaign-tbody');
-DATA.campaigns.forEach(c => {
-  const cls = c.result === 'win' ? 'win' : c.result === 'loss' ? 'loss' : 'ok';
-  const lbl = c.result === 'win' ? 'Working' : c.result === 'loss' ? 'Underperforming' : 'Steady';
-  const tr = document.createElement('tr');
-  tr.innerHTML = `<td style="font-weight:500">${c.name}</td><td style="color:var(--g)">${c.channel}</td><td>${c.reach}</td><td>${c.clicks}</td><td>${c.conv}</td><td style="font-family:var(--mono);font-weight:500">${c.rev}</td><td><span class="pill ${cls}">${lbl}</span></td>`;
-  tbody.appendChild(tr);
-});
+  <div class="rag-card red">
+    <div class="label">Marketing Hours (Mar)</div>
+    <div class="actual">70.5 hrs</div>
+    <div class="target">Monthly cap: 20 hrs</div>
+    <div class="pct">3.5× over cap — 50.5 hrs excess</div>
+    <span class="pill pill-red">⚠ Significant Breach</span>
+  </div>
 
-const mcBox = document.getElementById('mc-box');
-const actHtml = DATA.mc.actions.map((a,i) => `<div class="mc-action"><div class="mc-num">${i+1}</div><span>${a}</span></div>`).join('');
-mcBox.innerHTML = `<div class="mc-header"><div class="mc-avatar">MC</div><div><div class="mc-name">Marketing Claude — Monthly Analysis</div><div class="mc-sub">${DATA.period} · ${DATA.generatedBy}</div></div></div><div class="mc-summary">${DATA.mc.summary}</div><div>${actHtml}</div>`;
+</div>
 
-const revCanvas = document.getElementById('revenueChart');
-new Chart(revCanvas, {
-  type: 'bar',
-  data: {
-    labels: DATA.revenueMonths,
-    datasets: [
-      { label: 'Actual',  data: DATA.revenueActual, backgroundColor: '#6f275f', borderRadius: 4, order: 2 },
-      { label: 'Target',  data: DATA.revenueTarget, type: 'line', borderColor: '#0d5d6d', borderWidth: 2, pointRadius: 0, tension: .4, fill: false, order: 1 }
-    ]
-  },
-  options: {
-    responsive: true, maintainAspectRatio: false,
-    plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => '$' + ctx.parsed.y.toLocaleString() } } },
-    scales: {
-      x: { grid: { display: false }, ticks: { font: { size: 11 }, color: '#777' } },
-      y: { grid: { color: 'rgba(0,0,0,.05)' }, ticks: { font: { size: 11 }, color: '#777', callback: v => '$' + Math.round(v/1000) + 'k' } }
-    }
-  }
-});
-document.getElementById('rev-legend').innerHTML = '<span><span class="lsq" style="background:#6f275f"></span>Actual</span><span><span class="lln" style="background:#0d5d6d"></span>Target</span>';
+<!-- ─── PLATFORM PERFORMANCE ─── -->
+<div class="section-title">Platform Performance — March 2026</div>
+<div class="grid-5" style="padding-bottom:4px;">
 
-new Chart(document.getElementById('reachChart'), {
-  type: 'bar',
-  data: {
-    labels: DATA.reachData.labels,
-    datasets: [{ data: DATA.reachData.values, backgroundColor: DATA.reachData.colors, borderRadius: 4 }]
-  },
-  options: {
-    indexAxis: 'y', responsive: true, maintainAspectRatio: false,
-    plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => ctx.parsed.x.toLocaleString() + ' reach/impressions' } } },
-    scales: {
-      x: { grid: { color: 'rgba(0,0,0,.05)' }, ticks: { font: { size: 11 }, color: '#777', callback: v => v >= 1000 ? Math.round(v/1000) + 'k' : v } },
-      y: { grid: { display: false }, ticks: { font: { size: 11 }, color: '#777' } }
-    }
-  }
-});
-</script>
+  <div class="platform-card">
+    <div class="platform-header">
+      <div class="platform-icon icon-li">in</div>
+      <div class="platform-name">LinkedIn</div>
+    </div>
+    <div class="metric-row"><span class="ml">Impressions</span><span class="mv">2,914</span></div>
+    <div class="metric-row"><span class="ml">Unique impressions</span><span class="mv">1,173</span></div>
+    <div class="metric-row"><span class="ml">Clicks</span><span class="mv">86</span></div>
+    <div class="metric-row"><span class="ml">Reactions</span><span class="mv">50</span></div>
+    <div class="metric-row"><span class="ml">Reposts</span><span class="mv">5</span></div>
+    <div class="metric-row"><span class="ml">Comments</span><span class="mv">1</span></div>
+    <div class="metric-row"><span class="ml">New followers</span><span class="mv up">+11</span></div>
+    <div class="metric-row"><span class="ml">Avg engagement rate</span><span class="mv">4.6%</span></div>
+    <div class="metric-row"><span class="ml">Posts published</span><span class="mv">21</span></div>
+  </div>
+
+  <div class="platform-card">
+    <div class="platform-header">
+      <div class="platform-icon icon-fb">f</div>
+      <div class="platform-name">Facebook</div>
+    </div>
+    <div class="metric-row"><span class="ml">Post views</span><span class="mv">5,669</span></div>
+    <div class="metric-row"><span class="ml">Viewers (unique)</span><span class="mv">3,224</span></div>
+    <div class="metric-row"><span class="ml">Page visits</span><span class="mv">157</span></div>
+    <div class="metric-row"><span class="ml">Interactions</span><span class="mv">27</span></div>
+    <div class="metric-row"><span class="ml">Link clicks</span><span class="mv">25</span></div>
+    <div class="metric-row"><span class="ml">New follows</span><span class="mv up">+6</span></div>
+    <div class="metric-row"><span class="ml">Reach</span><span class="mv">167</span></div>
+  </div>
+
+  <div class="platform-card">
+    <div class="platform-header">
+      <div class="platform-icon icon-ig">ig</div>
+      <div class="platform-name">Instagram</div>
+    </div>
+    <div class="metric-row"><span class="ml">Post views</span><span class="mv">346</span></div>
+    <div class="metric-row"><span class="ml">Profile visits</span><span class="mv">8</span></div>
+    <div class="metric-row"><span class="ml">Interactions</span><span class="mv">10</span></div>
+    <div class="metric-row"><span class="ml">Link clicks</span><span class="mv">0</span></div>
+    <div class="metric-row"><span class="ml">New follows</span><span class="mv up">+3</span></div>
+    <div class="metric-row"><span class="ml">Status</span><span class="mv" style="color:var(--amber);">Low activity</span></div>
+  </div>
+
+  <div class="platform-card">
+    <div class="platform-header">
+      <div class="platform-icon icon-wix">W</div>
+      <div class="platform-name">Wix / Website</div>
+    </div>
+    <div class="metric-row"><span class="ml">Site sessions</span><span class="mv">2,363</span></div>
+    <div class="metric-row"><span class="ml">Unique visitors</span><span class="mv">2,061</span></div>
+    <div class="metric-row"><span class="ml">Page views</span><span class="mv">2,861</span></div>
+    <div class="metric-row"><span class="ml">Orders (conversion table)</span><span class="mv">81</span></div>
+    <div class="metric-row"><span class="ml">Gross sales</span><span class="mv">$1,139</span></div>
+    <div class="metric-row"><span class="ml">Avg order value</span><span class="mv">$14.40</span></div>
+    <div class="metric-row"><span class="ml">Top page (organic)</span><span class="mv" style="font-size:10px;">Record of Convo template</span></div>
+    <div class="metric-row"><span class="ml">Top site search</span><span class="mv" style="font-size:10px;">TLI41225, axcelerate</span></div>
+  </div>
+
+  <div class="platform-card">
+    <div class="platform-header">
+      <div class="platform-icon icon-g">G</div>
+      <div class="platform-name">Google Ads + Organic</div>
+    </div>
+    <div class="metric-row"><span class="ml">Ad clicks</span><span class="mv">1,177</span></div>
+    <div class="metric-row"><span class="ml">Ad impressions</span><span class="mv">17,570</span></div>
+    <div class="metric-row"><span class="ml">Ad CTR</span><span class="mv up">6.70%</span></div>
+    <div class="metric-row"><span class="ml">Avg CPC</span><span class="mv">$0.25</span></div>
+    <div class="metric-row"><span class="ml">Ad spend</span><span class="mv">$305</span></div>
+    <div class="metric-row"><span class="ml">Optimisation score</span><span class="mv up">89.4%</span></div>
+    <div class="metric-row"><span class="ml">Organic impressions</span><span class="mv">5,686</span></div>
+    <div class="metric-row"><span class="ml">Organic clicks</span><span class="mv">11</span></div>
+    <div class="metric-row"><span class="ml">Organic CTR</span><span class="mv down">0.19%</span></div>
+  </div>
+
+</div>
+
+<!-- ─── CAMPAIGN BREAKDOWN ─── -->
+<div class="section-title">Campaign Breakdown — March 2026</div>
+<div style="padding: 0 32px;">
+  <div style="background:var(--white); border-radius:8px; overflow:hidden;">
+    <table class="campaign-table">
+      <thead>
+        <tr>
+          <th>Campaign</th>
+          <th>Channel</th>
+          <th>Reach / Impressions</th>
+          <th>Clicks / Opens</th>
+          <th>Engagement</th>
+          <th>Revenue Attributed</th>
+          <th>Result</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Easter Sale — 10% off Forms, Templates &amp; Registers</td>
+          <td>LinkedIn, Facebook, Instagram</td>
+          <td>~6,800 (combined)</td>
+          <td>~30 link clicks</td>
+          <td>Low — mostly impressions</td>
+          <td>$1,503 (Wix + Stripe)</td>
+          <td><span class="badge badge-amber">Steady</span></td>
+        </tr>
+        <tr>
+          <td>ADC Free Resource Campaign</td>
+          <td>LinkedIn</td>
+          <td>562 impressions</td>
+          <td>39 clicks (top post)</td>
+          <td>8.7% engagement rate</td>
+          <td>Indirect — brand/trust</td>
+          <td><span class="badge badge-green">Working</span></td>
+        </tr>
+        <tr>
+          <td>Compliance Thought Leadership (validation, governance, ASQA standards)</td>
+          <td>LinkedIn</td>
+          <td>~1,800 impressions</td>
+          <td>~50 clicks combined</td>
+          <td>Avg 4–9% per post</td>
+          <td>Indirect — positioning</td>
+          <td><span class="badge badge-green">Working</span></td>
+        </tr>
+        <tr>
+          <td>AVC Award Recognition Post</td>
+          <td>LinkedIn</td>
+          <td>243 impressions</td>
+          <td>14 clicks</td>
+          <td>14.8% — highest of month</td>
+          <td>Brand / credibility</td>
+          <td><span class="badge badge-green">Working</span></td>
+        </tr>
+        <tr>
+          <td>EmpowerU SCORM Product Spotlight</td>
+          <td>LinkedIn</td>
+          <td>157 impressions</td>
+          <td>7 clicks</td>
+          <td>7.0% engagement</td>
+          <td>Unknown — no direct sales tracked</td>
+          <td><span class="badge badge-amber">Steady</span></td>
+        </tr>
+        <tr>
+          <td>Google Ads — Coast Wide Training Solutions</td>
+          <td>Google Ads</td>
+          <td>17,570 impressions</td>
+          <td>1,177 clicks</td>
+          <td>6.70% CTR</td>
+          <td>Not directly attributable from data</td>
+          <td><span class="badge badge-green">Working</span></td>
+        </tr>
+        <tr>
+          <td>Newsletter — March edition</td>
+          <td>Email</td>
+          <td>Sent — opens/CTR not in export</td>
+          <td>Not available</td>
+          <td>Not available</td>
+          <td>Not attributable from data</td>
+          <td><span class="badge badge-grey">No Data</span></td>
+        </tr>
+        <tr>
+          <td>Booking Times — Course Enrolments</td>
+          <td>Booking Times platform</td>
+          <td>6 transactions</td>
+          <td>6 converted</td>
+          <td>$574 gross revenue</td>
+          <td>$511 (cash received)</td>
+          <td><span class="badge badge-amber">Steady</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+
+<!-- ─── EMAIL PERFORMANCE ─── -->
+<div class="section-title">Email Campaign Performance — March 2026</div>
+<div style="padding: 0 32px;">
+  <div style="background:var(--white); border-radius:8px; overflow:hidden;">
+    <table class="campaign-table">
+      <thead>
+        <tr>
+          <th>Campaign</th>
+          <th>Sent</th>
+          <th>Open Rate</th>
+          <th>Click Rate</th>
+          <th>Site Sessions</th>
+          <th>Orders</th>
+          <th>Result</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>The VET Scoop: March Newsletter</strong></td>
+          <td>2,198</td>
+          <td style="color:var(--green);font-weight:600;">44.5%</td>
+          <td style="color:var(--green);font-weight:600;">26%</td>
+          <td>1</td>
+          <td>0</td>
+          <td><span class="badge badge-green">Working</span></td>
+        </tr>
+        <tr>
+          <td>FREE ADC Preparation Tool download</td>
+          <td>2,188</td>
+          <td>26.9%</td>
+          <td>5.7%</td>
+          <td style="color:var(--green);font-weight:600;">129</td>
+          <td style="color:var(--green);font-weight:600;">50</td>
+          <td><span class="badge badge-green">Working</span></td>
+        </tr>
+        <tr>
+          <td>Easter Sale launch — 10% off Templates &amp; Forms</td>
+          <td>2,208</td>
+          <td>25.9%</td>
+          <td>5.4%</td>
+          <td>12</td>
+          <td>0</td>
+          <td><span class="badge badge-amber">Steady</span></td>
+        </tr>
+        <tr>
+          <td>Easter Sale reminder — Ending Soon</td>
+          <td>2,243</td>
+          <td>22.4%</td>
+          <td>3%</td>
+          <td>2</td>
+          <td>0</td>
+          <td><span class="badge badge-amber">Steady</span></td>
+        </tr>
+        <tr>
+          <td>Easter Sale last chance — Gone by tomorrow</td>
+          <td>2,182</td>
+          <td>20.1%</td>
+          <td>3%</td>
+          <td>10</td>
+          <td>0</td>
+          <td><span class="badge badge-amber">Steady</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div style="background:var(--green-bg);border:1px solid #a8ddc0;border-radius:6px;padding:10px 14px;margin-top:10px;font-size:12px;color:#1a5c35;line-height:1.55;">
+    <strong>📌 Key insight:</strong> The ADC free resource email drove 129 site sessions and 50 orders — by far the highest-converting email of the month. The newsletter achieved a 44.5% open rate and 26% click rate, well above industry benchmarks. The Easter Sale sequence (3 emails) combined for only 24 sessions and zero attributed orders. Free/value content is converting; discount campaigns are not.
+  </div>
+</div>
+
+<!-- ─── SOCIAL POST PERFORMANCE ─── -->
+<div class="section-title">Social Post Performance by Platform — March 2026</div>
+<div class="grid-3">
+  <div class="platform-card">
+    <div class="platform-header">
+      <div class="platform-icon icon-li">in</div>
+      <div class="platform-name">LinkedIn — 17 posts</div>
+    </div>
+    <div class="metric-row"><span class="ml">Total impressions</span><span class="mv">1,216</span></div>
+    <div class="metric-row"><span class="ml">Total reach</span><span class="mv">712</span></div>
+    <div class="metric-row"><span class="ml">Total interactions</span><span class="mv">37</span></div>
+    <div class="metric-row"><span class="ml">Site sessions from posts</span><span class="mv">0</span></div>
+    <div class="metric-row"><span class="ml">Top post (impressions)</span><span class="mv" style="font-size:10px;">EmpowerU SCORM — 157 imp</span></div>
+    <div class="metric-row"><span class="ml">Top post (engagement)</span><span class="mv" style="font-size:10px;">Easter launch — 7.6% ER</span></div>
+    <div class="metric-row"><span class="ml">Avg engagement rate</span><span class="mv">~3.2%</span></div>
+  </div>
+  <div class="platform-card">
+    <div class="platform-header">
+      <div class="platform-icon icon-fb">f</div>
+      <div class="platform-name">Facebook — 18 posts</div>
+    </div>
+    <div class="metric-row"><span class="ml">Total impressions</span><span class="mv">233</span></div>
+    <div class="metric-row"><span class="ml">Total reach</span><span class="mv">453</span></div>
+    <div class="metric-row"><span class="ml">Total interactions</span><span class="mv">11</span></div>
+    <div class="metric-row"><span class="ml">Site sessions from posts</span><span class="mv">0</span></div>
+    <div class="metric-row"><span class="ml">Top post</span><span class="mv" style="font-size:10px;">Validation — 20 imp, 5% ER</span></div>
+    <div class="metric-row"><span class="ml">Status</span><span class="mv" style="color:var(--amber);">Low reach</span></div>
+  </div>
+  <div class="platform-card">
+    <div class="platform-header">
+      <div class="platform-icon icon-ig">ig</div>
+      <div class="platform-name">Instagram — 17 posts</div>
+    </div>
+    <div class="metric-row"><span class="ml">Total impressions</span><span class="mv">225</span></div>
+    <div class="metric-row"><span class="ml">Total reach</span><span class="mv">154</span></div>
+    <div class="metric-row"><span class="ml">Total interactions</span><span class="mv">8</span></div>
+    <div class="metric-row"><span class="ml">Site sessions from posts</span><span class="mv">0</span></div>
+    <div class="metric-row"><span class="ml">Top posts</span><span class="mv" style="font-size:10px;">Admin overwhelm + EmpowerU — 12.5% ER</span></div>
+    <div class="metric-row"><span class="ml">Status</span><span class="mv" style="color:var(--amber);">Minimal traction</span></div>
+  </div>
+</div>
+<div style="padding: 0 32px; margin-top: 10px;">
+  <div style="background:var(--amber-bg);border:1px solid #e8c96a;border-radius:6px;padding:10px 14px;font-size:12px;color:#7a5500;line-height:1.55;">
+    <strong>📌 Key insight:</strong> Facebook and Instagram combined drove zero site sessions from 52 posts this month. LinkedIn is the only social channel producing meaningful reach for CWTS's audience. The volume of posting across all three platforms (52 posts total) is consuming significant Harvest hours for negligible return on Facebook and Instagram. This warrants a format and frequency review for April.
+  </div>
+</div>
+
+<!-- ─── HARVEST HOURS ─── -->
+<div class="section-title">Marketing Hours — March 2026 (Harvest)</div>
+<div class="grid-2">
+
+  <div class="hours-card">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;">
+      <div>
+        <div style="font-size:22px;font-weight:700;color:var(--red);">70.5 hrs</div>
+        <div style="font-size:11px;color:var(--grey);margin-top:2px;">vs 20-hour monthly cap</div>
+      </div>
+      <span class="pill pill-red">3.5× over cap</span>
+    </div>
+    <div class="hours-bar-bg"><div class="hours-bar-fill" style="width:100%;"></div></div>
+    <div style="font-size:10px;color:var(--grey);margin-bottom:12px;">Cap = 20 hrs &nbsp;|&nbsp; Actual = 70.5 hrs &nbsp;|&nbsp; Excess = 50.5 hrs</div>
+    <div class="hours-row"><span>Kai (Website / Digital)</span><span style="font-weight:600;">30.6 hrs</span></div>
+    <div class="hours-row"><span>Sandra (Content / Social / Analytics)</span><span style="font-weight:600;">25.4 hrs</span></div>
+    <div class="hours-row"><span>Tracy (Strategy / Newsletter / Video)</span><span style="font-weight:600;">13.9 hrs</span></div>
+    <div class="hours-row"><span>Caz (misc marketing tasks)</span><span style="font-weight:600;">0.7 hrs</span></div>
+  </div>
+
+  <div class="hours-card">
+    <div style="font-size:12px;font-weight:700;color:var(--navy);margin-bottom:12px;">Hours by Activity</div>
+    <div class="hours-row"><span>Website maintenance</span><span style="font-weight:600;color:var(--red);">27.8 hrs</span></div>
+    <div class="hours-row"><span>Special request marketing (videos/badges)</span><span style="font-weight:600;">9.2 hrs</span></div>
+    <div class="hours-row"><span>Internal meetings</span><span style="font-weight:600;">6.4 hrs</span></div>
+    <div class="hours-row"><span>Social media content</span><span style="font-weight:600;">5.6 hrs</span></div>
+    <div class="hours-row"><span>Strategy &amp; planning</span><span style="font-weight:600;">5.4 hrs</span></div>
+    <div class="hours-row"><span>Newsletter build</span><span style="font-weight:600;">3.8 hrs</span></div>
+    <div class="hours-row"><span>Analytics &amp; reporting</span><span style="font-weight:600;">3.4 hrs</span></div>
+    <div class="hours-row"><span>Google Ads management</span><span style="font-weight:600;">1.9 hrs</span></div>
+    <div class="hours-row"><span>Blog writing &amp; publishing</span><span style="font-weight:600;">0.9 hrs</span></div>
+    <div class="hours-row"><span>Email campaigns</span><span style="font-weight:600;">0.4 hrs</span></div>
+  </div>
+
+</div>
+
+<!-- ─── TOP CONTENT ─── -->
+<div class="section-title">Top Performing Content — March 2026</div>
+<div style="padding: 0 32px;">
+  <div style="background:var(--white); border-radius:8px; overflow:hidden;">
+    <table class="campaign-table">
+      <thead>
+        <tr>
+          <th>Content</th>
+          <th>Platform</th>
+          <th>Impressions</th>
+          <th>Clicks</th>
+          <th>Engagement</th>
+          <th>Note</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>ADC deadline post — free template download</td>
+          <td>LinkedIn</td>
+          <td>562</td>
+          <td>39</td>
+          <td><strong>8.7%</strong></td>
+          <td>Best performing post. Free resource → high intent audience.</td>
+        </tr>
+        <tr>
+          <td>AVC Award announcement</td>
+          <td>LinkedIn</td>
+          <td>243</td>
+          <td>14</td>
+          <td><strong>14.8%</strong></td>
+          <td>Highest engagement rate of month. Credibility content works.</td>
+        </tr>
+        <tr>
+          <td>ASQA audit focus — 2025 Outcome Standards</td>
+          <td>LinkedIn</td>
+          <td>131</td>
+          <td>9</td>
+          <td><strong>9.2%</strong></td>
+          <td>Compliance thought leadership — consistent performer.</td>
+        </tr>
+        <tr>
+          <td>Easter sale launch post</td>
+          <td>LinkedIn</td>
+          <td>119</td>
+          <td>2</td>
+          <td>7.6%</td>
+          <td>Decent reach, low click-through. Product posts need harder CTA.</td>
+        </tr>
+        <tr>
+          <td>EmpowerU SCORM product post</td>
+          <td>LinkedIn</td>
+          <td>157</td>
+          <td>7</td>
+          <td>7.0%</td>
+          <td>Good engagement for a product post. Worth repeating format.</td>
+        </tr>
+        <tr>
+          <td>Record of Conversation Template (organic search)</td>
+          <td>Google / Wix</td>
+          <td>518 impressions</td>
+          <td>3 clicks</td>
+          <td>Avg position 5.4</td>
+          <td>Top organic page. 0.6% CTR — title/meta optimisation opportunity.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ─── MC ANALYSIS ─── -->
+<div class="section-title">MC Analysis &amp; Recommendations — April 2026</div>
+<div style="padding: 0 32px 24px;">
+  <div class="analysis-box">
+    <h3>Strategic Summary — March 2026</h3>
+
+    <p><strong>The consulting engine is running well. The product and course revenue streams are not.</strong> Total business revenue of $99,133 is a strong month — 13% above the monthly pace required to hit the $1,050,000 FY2027 target. Consulting is fully utilised and delivering. That's the good news.</p>
+
+    <p>The bad news: combined product and course revenue for March came in at $2,014 — against a monthly pace requirement of approximately $19,583 to hit the $235,000 FY2027 target. That's 10 cents in the dollar. Two months into Q4 FY2026 and the scalable revenue streams are not moving. The Easter Sale ran for the full month across LinkedIn, Facebook, and Instagram, generated reasonable social impressions, and produced $1,503 in Wix and Stripe revenue. The conversion rate from 2,061 unique visitors to 81 orders is 3.9% — which is functional — but at an average order value of $14.40, the basket is too small to drive meaningful revenue. The traffic is coming in; the problem is what people are buying, or not buying.</p>
+
+    <p>LinkedIn is performing above expectation as a brand and thought-leadership channel. The ADC free resource post (562 impressions, 39 clicks, 8.7% engagement) is the clearest signal of what works: free, high-value, time-sensitive compliance content drives action. The AVC award post (14.8% engagement) confirms the team's credibility content resonates. These are not flukes — they are a pattern. The Easter sale posts, by comparison, averaged under 3 clicks per post. Product promotion without a strong reason to act is not cutting through on LinkedIn.</p>
+
+    <p>The marketing hours situation requires an honest conversation. 70.5 hours were logged against the marketing project in March — 3.5 times the 20-hour monthly cap. Website maintenance alone consumed 27.8 hours. This is not a marketing operations problem; it is a project scope problem. The new courses page build, WordPress work, and CMS data entry are development tasks that appear to be running through the marketing project code. Before April begins, it needs to be clear what counts as marketing hours versus website development, and whether the 20-hour cap applies to both or just to promotional and content work.</p>
+
+    <div class="risk-box">
+      <strong>⚠ Risk Flag</strong>
+      Product and course revenue is tracking at less than 11% of the pace required to hit FY2027 targets. The AC/CC coaching programs are not yet live and generating enrolments. The Easter Sale produced minimal uplift relative to the effort invested. If this trajectory continues into EOFY, the $235,000 product + course target is not achievable. This needs a plan, not an assumption that EOFY will fix it.
+    </div>
+
+    <div style="margin-top:18px; margin-bottom:10px; font-size:12px; font-weight:700; color:var(--purple); text-transform:uppercase; letter-spacing:0.8px;">April Action Plan</div>
+    <ul class="action-list">
+      <li><strong>Get the AC/CC program live and generating enrolments this month.</strong> These courses are the primary scalable revenue engine. Every week they sit in build without enrolments is lost FY2027 income. Set a live date for April, brief a launch email sequence, and post to LinkedIn the moment they open.</li>
+      <li><strong>Lift the average Wix order value.</strong> $14.40 average order is a register or template item. Push QMS packs, full policy suites, and the aX guide — products in the $150–$500 range — to the front of the shop and into email campaigns. Run a fortnightly product email in April targeting QMS suite and TLI41225 as the calendar requires.</li>
+      <li><strong>Replicate the ADC post format for May EOFY warm-up.</strong> Free resource + compliance deadline + CTA is the highest-converting content format visible in the data. The EOFY sale prep starts Week 3 of May. Begin building that pipeline now with a compliance-themed email and LinkedIn post in Week 3–4 of April.</li>
+      <li><strong>Resolve the marketing hours classification issue before April closes.</strong> Define what is marketing versus development, log it separately, and report both. The 20-hour cap cannot be managed if development work is sitting inside the marketing project code. This is a Harvest setup conversation for Jodie.</li>
+      <li><strong>Confirm Vetr RCTI and add March actuals to the dashboard.</strong> Once received, check whether Vetr revenue is trending toward the $15,000 FY2027 target and whether any action is needed to drive Vetr-specific traffic or listings.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  Coast Wide Training Solutions Pty Ltd &nbsp;·&nbsp; ABN 71 674 767 447 &nbsp;·&nbsp; www.coastwidetraining.com.au &nbsp;·&nbsp;
+  MC Marketing Dashboard &nbsp;·&nbsp; March 2026 &nbsp;·&nbsp;
+  <em>This report is an internal working document. MC analysis must be reviewed by a team member before external distribution.</em>
+</div>
+
 </body>
 </html>
