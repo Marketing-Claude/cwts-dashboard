@@ -152,80 +152,104 @@ body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--light); col
 </div>
 
 <!-- ─── REVENUE KPIs ─── -->
-<div class="section-title">Revenue KPIs — FY2027 Tracking</div>
-<div class="grid-4">
+<div class="section-title">Revenue KPIs — FY2027 Tracking &nbsp;<span style="font-size:10px;font-weight:400;color:var(--grey);">🟡 Revenue stream &nbsp; 🟢 Business performance &nbsp; ⬜ Marketing spend &nbsp; 🔴 Capacity</span></div>
 
-  <div class="rag-card nodata">
+<!-- ROW 1: Revenue streams (yellow) + Consulting + Total Business (green, far right) -->
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr 1fr;gap:12px;padding:0 32px;">
+
+  <!-- Wix Shop — yellow -->
+  <div class="rag-card" style="border-left-color:#c47d00;background:#fffaed;">
     <div class="label">Product Sales — Wix Shop</div>
     <div class="actual">$1,503</div>
-    <div class="target">FY2027 Target: $140,000 &nbsp;|&nbsp; Monthly pace: ~$11,667</div>
-    <div class="pct">13% of monthly pace</div>
+    <div class="target">FY2027 Target: $140,000 &nbsp;|&nbsp; Pace: ~$11,667/mo</div>
+    <div class="pct" style="color:var(--red);">13% of monthly pace</div>
     <span class="pill pill-red">⚠ Review</span>
     <div style="font-size:10px;color:var(--grey);margin-top:6px;">Wix shop + Stripe. Easter 10% sale active all month.</div>
+    <div style="font-size:10px;color:var(--grey);margin-top:2px;">vs Feb: <span style="color:var(--grey);">— no prior data</span></div>
   </div>
 
-  <div class="rag-card nodata">
-    <div class="label">Product Sales — Vetr</div>
-    <div class="actual">Pending</div>
-    <div class="target">FY2027 Target: $15,000 &nbsp;|&nbsp; Monthly pace: ~$1,250</div>
-    <div class="pct">RCTI outstanding</div>
-    <span class="pill pill-grey">⏳ No Data</span>
-    <div style="font-size:10px;color:var(--grey);margin-top:6px;">$504 in Xero = Feb cash. Exclude until RCTI received.</div>
+  <!-- Partnerships Revenue (Vetr + BT) — yellow -->
+  <div class="rag-card" style="border-left-color:#c47d00;background:#fffaed;">
+    <div class="label">Partnerships Revenue (Vetr + Booking Times)</div>
+    <div class="actual">$511 + Vetr ⏳</div>
+    <div class="target">FY2027 Target: $15,000 &nbsp;|&nbsp; Pace: ~$1,250/mo</div>
+    <div class="pct" style="color:var(--grey);">Vetr RCTI outstanding</div>
+    <span class="pill pill-grey">⏳ Partial Data</span>
+    <div style="font-size:10px;color:var(--grey);margin-top:6px;">BT cash: $510.98. Vetr $504 in Xero = Feb cash — excluded until RCTI.</div>
+    <div style="font-size:10px;color:var(--grey);margin-top:2px;">vs Feb: <span style="color:var(--grey);">— no prior data</span></div>
   </div>
 
-  <div class="rag-card amber">
-    <div class="label">Course Enrolments</div>
-    <div class="actual">$511</div>
-    <div class="target">FY2027 Target: $80,000 &nbsp;|&nbsp; Monthly pace: ~$6,667</div>
-    <div class="pct">8% of monthly pace</div>
+  <!-- Course Enrolments — yellow -->
+  <div class="rag-card" style="border-left-color:#c47d00;background:#fffaed;">
+    <div class="label">CWTS Course Enrolments (aXcelerate)</div>
+    <div class="actual">$332</div>
+    <div class="target">FY2027 Target: $80,000 &nbsp;|&nbsp; Pace: ~$6,667/mo</div>
+    <div class="pct" style="color:var(--red);">5% of monthly pace</div>
     <span class="pill pill-red">⚠ Review</span>
-    <div style="font-size:10px;color:var(--grey);margin-top:6px;">Booking Times cash received. AC/CC programs not yet live.</div>
+    <div style="font-size:10px;color:var(--grey);margin-top:6px;">aX invoices: VET Foundations ($203) + QMS Essentials RPL ($129). AC/CC programs not yet live.</div>
+    <div style="font-size:10px;color:var(--grey);margin-top:2px;">vs Feb: <span style="color:var(--grey);">— no prior data</span></div>
   </div>
 
+  <!-- Consulting — green -->
   <div class="rag-card green">
     <div class="label">Consulting Revenue</div>
     <div class="actual">$96,615</div>
-    <div class="target">Total business target: $1,050,000 &nbsp;|&nbsp; Monthly pace: ~$87,500</div>
+    <div class="target">Monthly pace to $1,050,000: ~$87,500</div>
     <div class="pct">+10.4% above monthly pace</div>
     <span class="pill pill-green">✓ On Track</span>
-    <div style="font-size:10px;color:var(--grey);margin-top:6px;">Strong month. Cash basis includes K&T $10K settlement.</div>
+    <div style="font-size:10px;color:var(--grey);margin-top:6px;">Strong month. Cash basis includes K&amp;T $10K settlement.</div>
+    <div style="font-size:10px;color:var(--grey);margin-top:2px;">vs Feb: <span style="color:var(--grey);">— no prior data</span></div>
+  </div>
+
+  <!-- Total Business Revenue — green -->
+  <div class="rag-card green">
+    <div class="label">Total Business Revenue</div>
+    <div class="actual">$99,133</div>
+    <div class="target">Monthly pace to $1,050,000: ~$87,500</div>
+    <div class="pct">+13.3% above pace</div>
+    <span class="pill pill-green">✓ On Track</span>
+    <div style="font-size:10px;color:var(--grey);margin-top:6px;">Consulting carries month. Product + course streams need urgent attention.</div>
+    <div style="font-size:10px;color:var(--grey);margin-top:2px;">vs Feb: <span style="color:var(--grey);">— no prior data</span></div>
   </div>
 
 </div>
 
 <div class="spacer"></div>
-<div class="grid-4" style="padding-top:8px;">
 
-  <div class="rag-card green">
-    <div class="label">Total Business Revenue (Mar)</div>
-    <div class="actual">$99,133</div>
-    <div class="target">Monthly pace to $1,050,000: ~$87,500</div>
-    <div class="pct">+13.3% above pace</div>
-    <span class="pill pill-green">✓ On Track</span>
+<!-- ROW 2: Marketing spend (grey) + Hours (red) -->
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;padding:0 32px;padding-top:8px;">
+
+  <!-- LinkedIn Ad Spend — grey -->
+  <div class="rag-card nodata" style="border-left-color:#999;background:#f5f5f8;">
+    <div class="label">LinkedIn Ad Spend (Mar)</div>
+    <div class="actual">$0</div>
+    <div class="target">April budget: $200 allocated for AC/CC launch boost</div>
+    <div class="pct" style="color:var(--grey);">No spend in March</div>
+    <span class="pill pill-grey">Not activated</span>
+    <div style="font-size:10px;color:var(--grey);margin-top:6px;">Paid social default off. April: $200 boost on AC/CC launch post recommended.</div>
+    <div style="font-size:10px;color:var(--grey);margin-top:2px;">vs Feb: <span style="color:var(--grey);">— no prior data</span></div>
   </div>
 
-  <div class="rag-card red">
-    <div class="label">Total Product + Course (Mar)</div>
-    <div class="actual">$2,014</div>
-    <div class="target">Monthly pace to $235,000: ~$19,583</div>
-    <div class="pct">10% of monthly pace — 90% below target</div>
-    <span class="pill pill-red">⚠ Review</span>
-  </div>
-
-  <div class="rag-card amber">
+  <!-- Google Ads Spend — grey -->
+  <div class="rag-card nodata" style="border-left-color:#999;background:#f5f5f8;">
     <div class="label">Google Ads Spend (Mar)</div>
     <div class="actual">$305</div>
     <div class="target">Monthly budget: ~$417 &nbsp;|&nbsp; Annual: $5,000</div>
-    <div class="pct">73% of budget used</div>
+    <div class="pct" style="color:var(--teal);">73% of budget used</div>
     <span class="pill pill-green">✓ Within Budget</span>
+    <div style="font-size:10px;color:var(--grey);margin-top:6px;">6.70% CTR · $0.25 CPC · 89.4% optimisation score.</div>
+    <div style="font-size:10px;color:var(--grey);margin-top:2px;">vs Feb: <span style="color:var(--grey);">— no prior data</span></div>
   </div>
 
+  <!-- Marketing Hours — red -->
   <div class="rag-card red">
     <div class="label">Marketing Hours (Mar)</div>
     <div class="actual">70.5 hrs</div>
     <div class="target">Monthly cap: 20 hrs</div>
     <div class="pct">3.5× over cap — 50.5 hrs excess</div>
     <span class="pill pill-red">⚠ Significant Breach</span>
+    <div style="font-size:10px;color:var(--grey);margin-top:6px;">Website build (27.8 hrs) likely development — needs separate project code.</div>
+    <div style="font-size:10px;color:var(--grey);margin-top:2px;">vs Feb: <span style="color:var(--grey);">— no prior data</span></div>
   </div>
 
 </div>
@@ -523,6 +547,9 @@ body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--light); col
   </div>
 </div>
 
+<!-- ─── TOP CONTENT ─── -->
+<div class="section-title">Top Performing Content — March 2026</div>
+
 <!-- ─── HARVEST HOURS ─── -->
 <div class="section-title">Marketing Hours — March 2026 (Harvest)</div>
 <div class="grid-2">
@@ -559,8 +586,6 @@ body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--light); col
 
 </div>
 
-<!-- ─── TOP CONTENT ─── -->
-<div class="section-title">Top Performing Content — March 2026</div>
 <div style="padding: 0 32px;">
   <div style="background:var(--white); border-radius:8px; overflow:hidden;">
     <table class="campaign-table">
