@@ -1,531 +1,222 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-AU">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CWTS Marketing Dashboard — April 2026</title>
+<title>CWTS Marketing Dashboard — May 2026</title>
 <style>
-:root{--purple:#6f275f;--navy:#0f1751;--teal:#0d5d6d;--grey:#777777;--light:#f4f4f7;--mid:#e2e2ea;--white:#ffffff;--green:#1a7a4a;--amber:#c47d00;--red:#b52a2a;--green-bg:#eaf5ef;--amber-bg:#fffaed;--red-bg:#fdf0f0;--grey-bg:#f5f5f8;}
-*{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:'Segoe UI',Arial,sans-serif;background:var(--light);color:var(--navy);font-size:13px;}
-.header{background:var(--navy);padding:24px 32px;display:flex;justify-content:space-between;align-items:center;}
-.header h1{color:#fff;font-size:20px;font-weight:700;}
-.header p{color:#9ca8cc;font-size:12px;margin-top:3px;}
-.header-right{text-align:right;}
-.period-badge{background:var(--purple);color:#fff;padding:5px 14px;border-radius:20px;font-size:11px;font-weight:700;display:inline-block;}
-.generated{color:#9ca8cc;font-size:10px;margin-top:5px;}
-.note-blue{background:#dce8ff;border:1px solid #b0c8f0;border-radius:6px;padding:10px 14px;margin:12px 32px 0;font-size:12px;color:#2255aa;line-height:1.5;}
-.note-amber{background:#fff8e6;border:1px solid #e8c96a;border-radius:6px;padding:10px 14px;margin:6px 32px 0;font-size:12px;color:#7a5500;line-height:1.5;}
-.section-title{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:var(--grey);padding:18px 32px 8px;}
-.spacer{height:8px;}
-.rag-card{background:var(--white);border-radius:8px;padding:16px;border-left:4px solid var(--grey);}
-.rag-card.green{border-left-color:var(--green);background:var(--green-bg);}
-.rag-card.amber{border-left-color:var(--amber);background:var(--amber-bg);}
-.rag-card.red{border-left-color:var(--red);background:var(--red-bg);}
-.rag-card.grey-card{border-left-color:#999;background:var(--grey-bg);}
-.label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;color:var(--grey);margin-bottom:6px;}
-.actual{font-size:22px;font-weight:700;color:var(--navy);line-height:1.1;}
-.target{font-size:11px;color:var(--grey);margin-top:3px;}
-.pct{font-size:11px;font-weight:600;margin-top:3px;}
-.pill{display:inline-block;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:700;margin-top:6px;}
-.pill-green{background:#c8f0d8;color:var(--green);}
-.pill-amber{background:#fde9b0;color:var(--amber);}
-.pill-red{background:#f5c8c8;color:var(--red);}
-.pill-grey{background:#e0e0e8;color:var(--grey);}
-.compare{font-size:11px;margin-top:5px;}
-.up{color:var(--green);font-weight:600;}
-.down{color:var(--red);font-weight:600;}
-.flat{color:var(--grey);font-weight:600;}
-.platform-card{background:var(--white);border-radius:8px;padding:16px;}
-.platform-header{display:flex;align-items:center;gap:8px;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid var(--mid);}
-.platform-icon{width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:white;flex-shrink:0;}
-.icon-li{background:#0a66c2;}.icon-fb{background:#1877f2;}.icon-ig{background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#bc1888);}.icon-wix{background:var(--purple);}.icon-g{background:var(--teal);}
-.platform-name{font-size:12px;font-weight:700;color:var(--navy);}
-.metric-row{display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid var(--light);}
-.metric-row:last-child{border-bottom:none;}
-.ml{color:var(--grey);font-size:11px;}.mv{font-weight:600;font-size:12px;color:var(--navy);}
-.dash-table{width:100%;border-collapse:collapse;font-size:12px;}
-.dash-table th{background:var(--navy);color:#fff;padding:8px 12px;text-align:left;font-size:10px;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;}
-.dash-table td{padding:8px 12px;border-bottom:1px solid var(--mid);color:var(--navy);vertical-align:top;}
-.dash-table tr:last-child td{border-bottom:none;}
-.dash-table tr:nth-child(even) td{background:var(--light);}
-.badge{display:inline-block;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:700;}
-.badge-green{background:#c8f0d8;color:var(--green);}
-.badge-amber{background:#fde9b0;color:var(--amber);}
-.badge-red{background:#f5c8c8;color:var(--red);}
-.badge-grey{background:#e0e0e8;color:var(--grey);}
-.hours-card{background:var(--white);border-radius:8px;padding:20px;}
-.hours-bar-bg{background:var(--mid);border-radius:4px;height:10px;margin:8px 0;}
-.hours-bar-fill{border-radius:4px;height:10px;}
-.hours-row{display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid var(--light);font-size:12px;}
-.hours-row:last-child{border-bottom:none;}
-.analysis-box{background:var(--white);border-radius:8px;padding:24px;border-left:4px solid var(--purple);}
-.analysis-box h3{color:var(--purple);font-size:13px;font-weight:700;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.8px;}
-.analysis-box p{color:#333;font-size:13px;line-height:1.65;margin-bottom:12px;}
-.action-list{list-style:none;counter-reset:actions;}
-.action-list li{counter-increment:actions;display:flex;gap:12px;margin-bottom:10px;font-size:13px;line-height:1.55;color:#333;}
-.action-list li::before{content:counter(actions);background:var(--purple);color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;margin-top:1px;}
-.risk-box{background:var(--red-bg);border:1px solid #e8aaaa;border-radius:6px;padding:12px 16px;margin-top:12px;font-size:12px;color:#7a2020;line-height:1.55;}
-.risk-box strong{display:block;margin-bottom:4px;font-size:11px;text-transform:uppercase;letter-spacing:0.5px;}
-.eofy-banner{background:linear-gradient(135deg,var(--purple),#9e3a8a);border-radius:8px;padding:16px 20px;display:flex;align-items:center;gap:14px;}
-.may-card{background:var(--white);border-radius:8px;padding:14px;border-top:3px solid var(--purple);}
-.footer{text-align:center;padding:20px 32px;color:var(--grey);font-size:11px;margin-top:24px;border-top:1px solid var(--mid);}
+  :root{
+    --purple:#6f275f; --navy:#0f1751; --teal:#0d5d6d; --grey:#777777;
+    --green:#1e7a46; --amber:#b8860b; --red:#a32020; --nodata:#9b9b9b;
+    --bg:#f4f5f8; --card:#ffffff; --line:#e3e5ec;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--navy);line-height:1.5;padding:24px}
+  .wrap{max-width:1180px;margin:0 auto}
+  header{background:linear-gradient(90deg,var(--navy),var(--purple),var(--teal));color:#fff;border-radius:10px;padding:26px 30px;margin-bottom:22px}
+  header h1{font-size:24px;font-weight:bold;letter-spacing:.3px}
+  header .sub{font-size:14px;opacity:.92;margin-top:4px}
+  .badge{display:inline-block;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);padding:5px 14px;border-radius:20px;font-size:13px;font-weight:bold;margin-top:12px}
+  .gen{font-size:12px;opacity:.8;margin-top:8px}
+  h2{font-size:17px;color:var(--purple);margin:26px 0 12px;padding-bottom:6px;border-bottom:2px solid var(--line)}
+  .grid{display:grid;gap:14px}
+  .kpis{grid-template-columns:repeat(4,1fr)}
+  @media(max-width:900px){.kpis{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:520px){.kpis{grid-template-columns:1fr}}
+  .card{background:var(--card);border-radius:9px;padding:16px 16px 14px;border:1px solid var(--line);border-top:4px solid var(--grey)}
+  .card.green{border-top-color:var(--green)}
+  .card.amber{border-top-color:var(--amber)}
+  .card.red{border-top-color:var(--red)}
+  .card.nodata{border-top-color:var(--nodata)}
+  .card .label{font-size:12px;color:var(--grey);text-transform:uppercase;letter-spacing:.5px;font-weight:bold}
+  .card .val{font-size:25px;font-weight:bold;margin:6px 0 2px}
+  .card .target{font-size:12px;color:var(--grey)}
+  .status{display:inline-block;font-size:11px;font-weight:bold;padding:2px 9px;border-radius:12px;margin-top:9px;color:#fff}
+  .s-green{background:var(--green)} .s-amber{background:var(--amber)} .s-red{background:var(--red)} .s-nodata{background:var(--nodata)}
+  .pace{font-size:11px;color:var(--grey);margin-top:7px}
+  .arrow{font-size:12px;font-weight:bold;margin-left:6px}
+  .up{color:var(--green)} .down{color:var(--red)}
+  table{width:100%;border-collapse:collapse;background:var(--card);border-radius:9px;overflow:hidden;border:1px solid var(--line);font-size:13px}
+  th{background:var(--navy);color:#fff;text-align:left;padding:9px 11px;font-size:12px}
+  td{padding:9px 11px;border-top:1px solid var(--line)}
+  tr:nth-child(even) td{background:#fafbfc}
+  .tag{display:inline-block;font-size:11px;font-weight:bold;padding:2px 8px;border-radius:10px;color:#fff}
+  .t-work{background:var(--green)} .t-steady{background:var(--amber)} .t-under{background:var(--red)} .t-nodata{background:var(--nodata)}
+  .plat{grid-template-columns:repeat(5,1fr)}
+  @media(max-width:900px){.plat{grid-template-columns:repeat(2,1fr)}}
+  .plat .card{border-top-color:var(--teal)}
+  .plat .pm{display:flex;justify-content:space-between;font-size:12px;padding:3px 0;border-top:1px dashed var(--line)}
+  .plat .pm:first-of-type{border-top:none}
+  .plat .pm b{color:var(--navy)}
+  .analysis{background:var(--card);border:1px solid var(--line);border-radius:9px;padding:20px 22px}
+  .analysis p{margin-bottom:11px;font-size:14px}
+  .analysis ol{margin:8px 0 0 20px}
+  .analysis li{margin-bottom:9px;font-size:14px}
+  .flag{background:#fbeaea;border-left:4px solid var(--red);padding:11px 14px;border-radius:5px;margin:12px 0;font-size:13px}
+  .note{font-size:12px;color:var(--grey);font-style:italic;margin-top:8px}
+  .footer{font-size:11px;color:var(--grey);text-align:center;margin-top:26px;padding-top:14px;border-top:1px solid var(--line)}
 </style>
 </head>
 <body>
+<div class="wrap">
+<script>
+/* ============================================================
+   MASTER DATA OBJECT — edit here each month
+   All values ex GST unless noted. May 2026 reporting period.
+   ============================================================ */
+const DATA = {
+  period: "May 2026",
+  generated: "1 June 2026",
+  fyTargetsMonthlyPace: { wix:11667, vetr:1250, course:6667 }, // annual/12
 
-<!-- HEADER -->
-<div class="header">
-  <div>
-    <h1>Coast Wide Training Solutions</h1>
-    <p>Marketing Performance Dashboard — MC Analysis</p>
-  </div>
-  <div class="header-right">
-    <div class="period-badge">April 2026</div>
-    <div class="generated">Generated: 1 May 2026</div>
-  </div>
+  kpis: {
+    wixShop:   { actual:572,    target:11667, prior:null,  label:"Wix Shop Sales",      unit:"$", note:"6 orders (1 was $0 coupon). Pre-EOFY holding month." },
+    vetr:      { actual:171.50, target:1250,  prior:null,  label:"Partnerships / Vetr", unit:"$", note:"1 RCTI: Third Party Management Pack. Sold value; cash basis may differ." },
+    courses:   { actual:202.68, target:6667,  prior:null,  label:"Course Enrolments",   unit:"$", note:"3 aXcelerate enrolments (low-ticket). Excludes any non-invoiced." },
+    consulting:{ actual:null,   target:null,  prior:null,  label:"Consulting",          unit:"$", note:"At capacity. Xero Sales line not split by stream — see analysis." },
+
+    linkedinSpend:{ actual:260.39, target:null, prior:314.97, label:"LinkedIn Ad Spend", unit:"$", note:"Sponsored 'Website Visits' ad set." },
+    googleSpend:  { actual:299.48, target:280,  prior:null,   label:"Google Ads Spend",  unit:"$", note:"Near monthly cap. 88% on mobile, via PMax." },
+    marketingHrs: { actual:null,   target:20,   prior:null,   label:"Marketing Hours",   unit:"h", note:"From Teamwork — confirm marketing-tagged total before finalising." },
+    totalRev:     { actual:92811, target:87500, prior:null,   label:"Total Revenue (accrual)", unit:"$", note:"Xero Sales line, accrual. Cash basis $76,660. Mostly consulting." }
+  },
+
+  platforms: {
+    linkedin: { name:"LinkedIn", metrics:[
+      ["Organic impressions","3,192"],["Organic clicks","93"],
+      ["Paid impressions","26,015"],["Paid clicks","334"],
+      ["Best post CTR","6.6% (TAS)"]] },
+    facebook: { name:"Facebook", metrics:[
+      ["Reach","71"],["Views","1,391"],["Visits","86"],
+      ["Link clicks","2"],["Follows","3"]] },
+    instagram:{ name:"Instagram", metrics:[
+      ["Views","134"],["Interactions","15"],["Visits","4"],
+      ["Link clicks","0"],["Follows","0"]] },
+    wix:      { name:"Wix / Website", metrics:[
+      ["Top page","/shop/policy-packs"],["Shop orders","6"],
+      ["Shop revenue","$572"],["Email-driven sessions","high"],
+      ["Bounce (key pages)","84–100%"]] },
+    google:   { name:"Google Organic", metrics:[
+      ["GSC top query","'coast wide training'"],["Brand clicks","~10"],
+      ["Non-brand visibility","low"],["Best non-brand","'rto internal audit template'"],
+      ["GSC connected","NO — pending"]] }
+  },
+
+  campaigns: [
+    ["May Newsletter (Compliance Compass)","Email","All contacts","22% open","1 order","$110","steady"],
+    ["12 May Newsletter (re-send segment)","Email","1,391","8% open","0","$0","under"],
+    ["This Week in PD (x3)","Email","~2,280 ea","21–23% open","0","$0","steady"],
+    ["The Resource Drop (x4)","Email","~2,280 ea","22–24% open","0","$0","steady"],
+    ["LinkedIn Sponsored — Website Visits","LinkedIn (paid)","26,015 impr","334 clicks","0 tracked","$0","under"],
+    ["LinkedIn Organic (15 posts)","LinkedIn (organic)","3,192 impr","93 clicks","n/a","brand","work"],
+    ["Google Ads — PMax (prohibited type)","Google (paid)","18,204 impr","1,630 clicks","1 conv","n/t","under"],
+    ["Google Ads — EOFY Search / keywords","Google (paid)","0 impr","0 clicks","0","$0","under"],
+    ["Facebook / Instagram organic","Meta","~1,525 views","2 clicks","0","$0","under"]
+  ]
+};
+
+/* ---------- render ---------- */
+function money(v){ return v==null?"—":"$"+Number(v).toLocaleString("en-AU",{maximumFractionDigits:0}); }
+function statusFor(a,t){
+  if(a==null||t==null) return ["nodata","No data / N/A"];
+  const p=a/t;
+  if(p>=0.85) return ["green","On track"];
+  if(p>=0.5)  return ["amber","Monitor"];
+  return ["red","Review (>15% below)"];
+}
+function kpiCard(k,showTarget){
+  const [cls,txt]=statusFor(k.actual,k.target);
+  let pace="";
+  if(k.actual!=null&&k.target!=null){ pace=`${Math.round(k.actual/k.target*100)}% of monthly pace`; }
+  let arrow="";
+  if(k.prior!=null&&k.actual!=null){
+    const up=k.actual>=k.prior;
+    arrow=`<span class="arrow ${up?'up':'down'}">${up?'▲':'▼'} vs ${k.unit==='$'?money(k.prior):k.prior}</span>`;
+  }
+  const val=(k.unit==='$')?money(k.actual):(k.actual==null?"—":k.actual+(k.unit==='h'?" h":""));
+  return `<div class="card ${cls}">
+    <div class="label">${k.label}</div>
+    <div class="val">${val}${arrow}</div>
+    <div class="target">${showTarget&&k.target!=null?("Target "+(k.unit==='$'?money(k.target):k.target+(k.unit==='h'?" h":""))+"/mo"):"&nbsp;"}</div>
+    ${pace?`<div class="pace">${pace}</div>`:""}
+    <span class="status s-${cls}">${txt}</span>
+    <div class="note">${k.note||""}</div>
+  </div>`;
+}
+function platCard(p){
+  return `<div class="card"><div class="label" style="color:var(--teal)">${p.name}</div>
+    ${p.metrics.map(m=>`<div class="pm"><span>${m[0]}</span><b>${m[1]}</b></div>`).join("")}</div>`;
+}
+const tagMap={work:["t-work","Working"],steady:["t-steady","Steady"],under:["t-under","Underperforming"],brand:["t-steady","Brand (no $)"],nodata:["t-nodata","No data"]};
+function campRow(c){
+  const [cls,txt]=tagMap[c[6]]||tagMap.nodata;
+  return `<tr><td>${c[0]}</td><td>${c[1]}</td><td>${c[2]}</td><td>${c[3]}</td><td>${c[4]}</td><td>${c[5]}</td><td><span class="tag ${cls}">${txt}</span></td></tr>`;
+}
+
+document.write(`
+<header>
+  <h1>Coast Wide Training Solutions — Monthly Marketing Dashboard</h1>
+  <div class="sub">Performance, attribution and recommendations across all active channels</div>
+  <span class="badge">Reporting period: ${DATA.period}</span>
+  <div class="gen">Generated ${DATA.generated} · All values ex GST unless noted</div>
+</header>
+
+<h2>Revenue KPIs vs FY2027 Targets</h2>
+<div class="grid kpis">
+  ${kpiCard(DATA.kpis.wixShop,true)}
+  ${kpiCard(DATA.kpis.vetr,true)}
+  ${kpiCard(DATA.kpis.courses,true)}
+  ${kpiCard(DATA.kpis.consulting,false)}
+</div>
+<div class="grid kpis" style="margin-top:14px">
+  ${kpiCard(DATA.kpis.linkedinSpend,false)}
+  ${kpiCard(DATA.kpis.googleSpend,true)}
+  ${kpiCard(DATA.kpis.marketingHrs,true)}
+  ${kpiCard(DATA.kpis.totalRev,false)}
+</div>
+<div class="note">Monthly pace = FY2027 annual target ÷ 12. Wix $140k, Vetr $15k, Courses $80k. The &gt;15% below-target rule flags all three product/course streams as Review for May — expected in a deliberate pre-EOFY no-discount month, but recorded honestly.</div>
+
+<h2>Platform Performance</h2>
+<div class="grid plat">
+  ${platCard(DATA.platforms.linkedin)}
+  ${platCard(DATA.platforms.facebook)}
+  ${platCard(DATA.platforms.instagram)}
+  ${platCard(DATA.platforms.wix)}
+  ${platCard(DATA.platforms.google)}
 </div>
 
-<!-- TIMING NOTES -->
-<div class="note-blue">📋 <strong>Revenue basis:</strong> Consulting and Total Revenue cards show accrual figures (work done in April including May 1 invoices). Cash received = $70,659 (Xero). Accrual = $73,234. The $2,575 difference = invoices issued 1 May for April work, landing as May cash. &nbsp;|&nbsp; <strong>Vetr RCTI CWTS021 ($5,057.50):</strong> March sales — cash received April (in Xero cash figure). RCTI CWTS022 ($280) = April sold, cash May.</div>
-<div class="note-blue" style="margin-top:6px;">📋 <strong>Vetr RCTI CWTS022 ($280.00):</strong> April sales — cash deposits May. Shown as April sold, not in April Xero cash. Items: Conflict of Interest Pack, Session Plan Template, Third Party Agreement Template, Trainer/Assessor Register, EmpowerU x1.</div>
-<div class="note-amber" style="margin-top:6px;">📋 <strong>Hours note:</strong> April hours from Teamwork only — Harvest shows $0 for April marketing, no duplication risk. Jess (31.3 hrs) and Sandra completed a full-year marketing asset build this month — all written content, digital creatives, email campaigns, and templates for FY2026/27. One-off production sprint. Hours expected to normalise from May. &nbsp;|&nbsp; <strong>Ad spend note:</strong> Google Ads $301.90 + LinkedIn Ads $375.26 = $677.16 confirmed. Xero Promotions &amp; Advertising = $1,514.24 — remaining ~$837 gap still requires identification (likely platform subscriptions or other costs coded to this line).</div>
+<h2>Campaign Breakdown</h2>
+<table>
+  <thead><tr><th>Campaign</th><th>Channel</th><th>Reach / Sent</th><th>Clicks / Opens</th><th>Conversions</th><th>Revenue</th><th>Result</th></tr></thead>
+  <tbody>${DATA.campaigns.map(campRow).join("")}</tbody>
+</table>
+<div class="note">"n/t" = not tracked. LinkedIn paid shows 0 conversions because on-site conversion tracking is not confirmed firing — see action 2.</div>
 
-<!-- ─── KPI ROW 1 ─── -->
-<div class="section-title">Revenue KPIs — FY2027 Tracking &nbsp;<span style="font-size:10px;font-weight:400;color:var(--grey);">🟡 Revenue stream &nbsp; 🟢 Business performance &nbsp; ⬜ Marketing spend &nbsp; 🔴 Capacity</span></div>
-<div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:12px;padding:0 32px;">
+<h2>MC Analysis &amp; Recommendations</h2>
+<div class="analysis">
+  <p><b>What happened.</b> May was a browse-not-buy month, which is consistent with strategy: no discounting ahead of EOFY, so demand was deliberately held back. Traffic and engagement were healthy. Email open rates sat at 21–26% across the main sends, LinkedIn organic produced strong compliance-led engagement (the TAS post hit a 6.6% click rate), and the shop's policy-packs page was comfortably the most-visited destination. The problem is the conversion end: across nine in-scope email sends, attributed orders totalled one, Wix shop revenue was $572 from six orders (one a $0 coupon), Vetr returned a single $171.50 pack, and course enrolments were three low-ticket aXcelerate sales totalling $202.68.</p>
 
-  <!-- Wix Shop — yellow -->
-  <div class="rag-card" style="border-left-color:#c47d00;background:#fffaed;">
-    <div class="label">Product Sales — Wix Shop</div>
-    <div class="actual">$365</div>
-    <div class="target">FY2027 Target: $140,000 &nbsp;|&nbsp; Pace: ~$11,667/mo</div>
-    <div class="pct" style="color:var(--red);">3% of monthly pace</div>
-    <span class="pill pill-red">⚠ Review</span>
-    <div style="font-size:10px;color:var(--grey);margin-top:6px;">2 paid orders via Wix (Google paid search). No sale event active in April.</div>
-    <div class="compare">vs Mar $1,503: <span class="down">▼ –$1,138 (–76%)</span></div>
-  </div>
+  <p><b>What it means for trajectory.</b> All three product/course streams sit well below the monthly pace their FY2027 targets imply, tripping the Review threshold. In isolation that is alarming; in context it is the expected shape of a pre-EOFY month where buyers wait for the 1 June discount. The real test is June. The entire annual product story now leans heavily on EOFY converting the interest that May built. The audience is warm, the click behaviour is there, the purchase trigger was simply absent by design.</p>
 
-  <!-- Partnerships — yellow -->
-  <div class="rag-card" style="border-left-color:#c47d00;background:#fffaed;">
-    <div class="label">Partnerships Revenue (Vetr)</div>
-    <div class="actual">$280 <span style="font-size:13px;font-weight:400;color:var(--grey);">sold</span></div>
-    <div style="font-size:11px;color:var(--grey);margin-top:2px;">Cash received (CWTS021): $5,058 &nbsp;·&nbsp; <span style="color:var(--amber);">CWTS022 $280 lands May</span></div>
-    <div class="target" style="margin-top:5px;">FY2027 Target: $15,000 &nbsp;|&nbsp; Pace: ~$1,250/mo</div>
-    <div class="pct" style="color:var(--red);">22% of monthly pace (sold basis)</div>
-    <span class="pill pill-red">⚠ Review</span>
-    <div style="font-size:10px;color:var(--grey);margin-top:6px;">Small basket month — 5 individual items, no QMS Suite equivalent.</div>
-    <div class="compare">vs Mar $5,058 sold: <span class="down">▼ –$4,778 (–94%)</span></div>
-  </div>
+  <div class="flag"><b>Live issue — Google Ads is breaching strategy and wasting spend.</b> The enabled campaign is a Performance Max campaign, which the strategy explicitly prohibits (phrase and exact match only, no Smart Campaigns/PMax, Australia-only). It consumed effectively the entire $299 Google budget on 1,630 mostly-mobile clicks for one conversion, while the correctly-built EOFY Search and phrase-match keyword campaigns sat starved at $0. This is fixable today and should be.</div>
 
-  <!-- aX Enrolments — yellow -->
-  <div class="rag-card" style="border-left-color:#c47d00;background:#fffaed;">
-    <div class="label">CWTS Course Enrolments (aXcelerate)</div>
-    <div class="actual">$36</div>
-    <div class="target">FY2027 Target: $80,000 &nbsp;|&nbsp; Pace: ~$6,667/mo</div>
-    <div class="pct" style="color:var(--red);">0.5% of monthly pace</div>
-    <span class="pill pill-red">⚠ Review</span>
-    <div style="font-size:10px;color:var(--grey);margin-top:6px;">1 invoice: Adam Hancock — RTO Coaching "So...You want to become an RTO" — $35.65 nett. AC1 now live from May — enrolments expected to grow from June EOFY sale.</div>
-    <div class="compare">vs Mar $332: <span class="down">▼ –$296 (–89%)</span></div>
-  </div>
+  <div class="flag"><b>Live issue — newsletter list/segment.</b> The 12 May newsletter reached only 1,391 recipients at 8% open, against ~2,280 at 21%+ for every other send, with a duplicate-looking send the same day. If the June EOFY newsletter went out today on that same truncated segment, the sale announcement reached half the audience at a fraction of the open rate. Confirm before the day closes.</div>
 
-  <!-- Consulting — green -->
-  <div class="rag-card green">
-    <div class="label">Consulting Revenue</div>
-    <div class="actual">$72,550 <span style="font-size:13px;font-weight:400;color:#4a9a6a;">accrual</span></div>
-    <div style="font-size:11px;color:#4a9a6a;margin-top:2px;">Cash received: ~$65,197 &nbsp;·&nbsp; <span style="color:var(--amber);">$2,575 May 1 invoices</span></div>
-    <div class="target" style="margin-top:5px;">Monthly pace to $1,050,000: ~$87,500</div>
-    <div class="pct" style="color:var(--amber);">83% of monthly pace (accrual basis)</div>
-    <span class="pill pill-amber">Monitor</span>
-    <div style="font-size:10px;color:var(--grey);margin-top:6px;">Accrual P&L: $73,230 total sales less Vetr $280, Wix $365, aX $36. May 1 invoices ($2,575) for April work will appear as May cash.</div>
-    <div class="compare">vs Mar $96,615: <span class="down">▼ –$24,065 (–25%)</span></div>
-  </div>
+  <p><b>Action list for June (max 5):</b></p>
+  <ol>
+    <li><b>Fix Google Ads today.</b> Pause the Performance Max campaign. Enable the EOFY Search and phrase/exact keyword campaigns, Australia-only geo, Mon–Fri 7am–7pm AEST. Redirect the full Google budget into high-intent EOFY search while the sale is live. Owner: Kai.</li>
+    <li><b>Verify conversion tracking.</b> LinkedIn paid drove 334 clicks with zero tracked conversions and email clicks aren't attributing to orders. Confirm the LinkedIn Insight Tag and Wix purchase events are firing before EOFY spend ramps, or June's report repeats the same blind spot. Owner: Kai.</li>
+    <li><b>Confirm the EOFY newsletter reached the full list.</b> Check today's 1 June send used the ~2,280 audience, not the 1,391 segment. Re-send to the full list if it was truncated. Build the day-5 reissue-to-unopened into all nine June sends. Owner: Jess.</li>
+    <li><b>Add a Last Chance social countdown for the final week (24–30 June).</b> The plan leans on email for EOFY and keeps social light. Social costs nothing and the closing window converts hardest. Use the existing countdown templates, organic only on Meta given its near-zero attribution. Owner: Jess.</li>
+    <li><b>Scale what's already working at zero cost.</b> LinkedIn organic is the standout channel. Keep Jodie's compliance-led posts running Mon/Wed/Fri through June, each linking to a shop or course page, and personalise the 26 June Meet the Team placeholder before scheduling. Owner: Jodie/Tracy to personalise, Jess to schedule.</li>
+  </ol>
 
+  <p class="note">This written analysis is a strategic brief and must be reviewed by a CWTS team member before the report is shared externally. Course enrolment figure reflects three aXcelerate invoices; Xero cash basis will reconcile timing. Marketing hours card is pending confirmation of the marketing-tagged total from the Teamwork report. Google Search Console remains unconnected (Section 13.7) — organic reporting is limited to the GSC query export until it is linked.</p>
 </div>
 
-<div class="spacer"></div>
-
-<!-- ─── KPI ROW 2 ─── -->
-<div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:12px;padding:0 32px;">
-
-  <!-- LinkedIn Spend — grey -->
-  <div class="rag-card grey-card">
-    <div class="label">LinkedIn Ad Spend (Apr)</div>
-    <div class="actual">$375</div>
-    <div class="target">Monthly budget: ~$200 allocated &nbsp;|&nbsp; Daily budget: $12.50</div>
-    <div class="pct" style="color:var(--amber);">88% over planned allocation</div>
-    <span class="pill pill-amber">Monitor</span>
-    <div style="font-size:10px;color:var(--grey);margin-top:6px;">Website visits campaign. 45,234 imp · 503 clicks · 1.11% CTR · $0.75 CPC · 13,494 reach. QMS Essentials ad best performer (1.48% CTR, $225 spend).</div>
-    <div class="compare">vs Mar $0: <span class="down">▼ New spend activated</span></div>
-  </div>
-
-  <!-- Google Ads — grey -->
-  <div class="rag-card grey-card">
-    <div class="label">Google Ads Spend (Apr)</div>
-    <div class="actual">$302</div>
-    <div class="target">Monthly budget: ~$417 &nbsp;|&nbsp; Annual: $5,000</div>
-    <div class="pct" style="color:var(--green);">72% of budget — within cap</div>
-    <span class="pill pill-green">✓ Within Budget</span>
-    <div style="font-size:10px;color:var(--grey);margin-top:6px;">1,441 clicks · 21,860 imp · 6.59% CTR · $0.21 CPC · 280 conversions. Strong efficiency. Google Ads + LinkedIn = $677 total confirmed ad spend. Remaining ~$837 in Xero line unidentified.</div>
-    <div class="compare">vs Mar $305: <span class="flat">▼ –$3 (consistent)</span></div>
-  </div>
-
-  <!-- Marketing Hours — amber -->
-  <div class="rag-card amber">
-    <div class="label">Marketing Hours (Apr)</div>
-    <div class="actual">73.5 hrs</div>
-    <div class="target">Monthly cap: 20 hrs &nbsp;|&nbsp; Context: full-year asset build</div>
-    <div class="pct" style="color:var(--amber);">High — justified by scope</div>
-    <span class="pill pill-amber">One-off Investment</span>
-    <div style="font-size:10px;color:var(--grey);margin-top:6px;">Jess (31.3 hrs) + Sandra planned and produced a full year of written and digital marketing assets, email campaigns, and templates in April. This is a one-off production sprint — forward months should return to cap.</div>
-    <div class="compare">vs Mar 70.5 hrs: <span class="flat">— similarly elevated, different reason</span></div>
-  </div>
-
-  <!-- Total Revenue — green -->
-  <div class="rag-card green">
-    <div class="label">Total Business Revenue</div>
-    <div class="actual">$73,234 <span style="font-size:13px;font-weight:400;color:#4a9a6a;">accrual</span></div>
-    <div style="font-size:11px;color:#4a9a6a;margin-top:2px;">Cash received: $70,659 &nbsp;·&nbsp; <span style="color:var(--amber);">$2,575 lands May</span></div>
-    <div class="target" style="margin-top:5px;">Monthly pace to $1,050,000: ~$87,500</div>
-    <div class="pct" style="color:var(--amber);">84% of monthly pace (accrual basis)</div>
-    <span class="pill pill-amber">Monitor</span>
-    <div style="font-size:10px;color:var(--grey);margin-top:6px;">Accrual basis (work done in April incl. May 1 invoices). Cash basis $70,659. Both below pace — March settlement inflated that month.</div>
-    <div class="compare">vs Mar $99,133 cash: <span class="down">▼ –$25,899 (–26%)</span></div>
-  </div>
-
+<div class="footer">Coast Wide Training Solutions Pty Ltd · MC Monthly Marketing Dashboard · ${DATA.period} · Internal — review before external distribution</div>
+`);
+</script>
 </div>
-
-<!-- ─── PLATFORM PERFORMANCE ─── -->
-<div class="section-title">Platform Performance — April 2026</div>
-<div style="display:grid;grid-template-columns:repeat(5,1fr);gap:12px;padding:0 32px;">
-
-  <div class="platform-card">
-    <div class="platform-header"><div class="platform-icon icon-li">in</div><div class="platform-name">LinkedIn</div></div>
-    <div class="metric-row"><span class="ml">Impressions (organic)</span><span class="mv">2,836</span></div>
-    <div class="metric-row"><span class="ml">Unique impressions</span><span class="mv">1,349</span></div>
-    <div class="metric-row"><span class="ml">Clicks</span><span class="mv up">148</span></div>
-    <div class="metric-row"><span class="ml">Reactions</span><span class="mv">82</span></div>
-    <div class="metric-row"><span class="ml">Comments</span><span class="mv">4</span></div>
-    <div class="metric-row"><span class="ml">Reposts</span><span class="mv">8</span></div>
-    <div class="metric-row"><span class="ml">Avg engagement rate</span><span class="mv up">8.6%</span></div>
-    <div class="metric-row"><span class="ml">Posts published</span><span class="mv">17</span></div>
-    <div class="metric-row"><span class="ml">vs Mar clicks (86)</span><span class="mv up">▲ +62 (+72%)</span></div>
-  </div>
-
-  <div class="platform-card">
-    <div class="platform-header"><div class="platform-icon icon-fb">f</div><div class="platform-name">Facebook</div></div>
-    <div class="metric-row"><span class="ml">Post views</span><span class="mv">1,304</span></div>
-    <div class="metric-row"><span class="ml">Viewers (unique)</span><span class="mv">623</span></div>
-    <div class="metric-row"><span class="ml">Page visits</span><span class="mv">155</span></div>
-    <div class="metric-row"><span class="ml">Interactions</span><span class="mv up">85</span></div>
-    <div class="metric-row"><span class="ml">Link clicks</span><span class="mv down">2</span></div>
-    <div class="metric-row"><span class="ml">New follows</span><span class="mv">+2</span></div>
-    <div class="metric-row"><span class="ml">Site sessions</span><span class="mv down">~6</span></div>
-    <div class="metric-row"><span class="ml">vs Mar views (5,669)</span><span class="mv down">▼ –77%</span></div>
-  </div>
-
-  <div class="platform-card">
-    <div class="platform-header"><div class="platform-icon icon-ig">ig</div><div class="platform-name">Instagram</div></div>
-    <div class="metric-row"><span class="ml">Post views</span><span class="mv up">462</span></div>
-    <div class="metric-row"><span class="ml">Profile visits</span><span class="mv">9</span></div>
-    <div class="metric-row"><span class="ml">Interactions</span><span class="mv up">29</span></div>
-    <div class="metric-row"><span class="ml">Link clicks</span><span class="mv">0</span></div>
-    <div class="metric-row"><span class="ml">New follows</span><span class="mv">0</span></div>
-    <div class="metric-row"><span class="ml">Site sessions</span><span class="mv">minimal</span></div>
-    <div class="metric-row"><span class="ml">vs Mar views (346)</span><span class="mv up">▲ +34% — improving</span></div>
-  </div>
-
-  <div class="platform-card">
-    <div class="platform-header"><div class="platform-icon icon-wix">W</div><div class="platform-name">Wix / Website</div></div>
-    <div class="metric-row"><span class="ml">Paid orders</span><span class="mv">2</span></div>
-    <div class="metric-row"><span class="ml">Revenue (inc GST)</span><span class="mv">$401.50</span></div>
-    <div class="metric-row"><span class="ml">Top traffic source</span><span class="mv" style="font-size:10px;">Direct / Google referral</span></div>
-    <div class="metric-row"><span class="ml">Top page</span><span class="mv" style="font-size:10px;">Homepage (mobile)</span></div>
-    <div class="metric-row"><span class="ml">Top site search</span><span class="mv" style="font-size:10px;">validation, third party</span></div>
-    <div class="metric-row"><span class="ml">Top GSC query</span><span class="mv" style="font-size:10px;">coast wide training solutions</span></div>
-    <div class="metric-row"><span class="ml">Top blog</span><span class="mv" style="font-size:10px;">ASQA Audit Opening Meeting (new)</span></div>
-    <div class="metric-row"><span class="ml">Top button click</span><span class="mv" style="font-size:10px;">View Details (32 unique)</span></div>
-  </div>
-
-  <div class="platform-card">
-    <div class="platform-header"><div class="platform-icon icon-g">G</div><div class="platform-name">Google Ads + Organic</div></div>
-    <div class="metric-row"><span class="ml">Ad clicks</span><span class="mv up">1,441</span></div>
-    <div class="metric-row"><span class="ml">Ad impressions</span><span class="mv">21,860</span></div>
-    <div class="metric-row"><span class="ml">CTR</span><span class="mv up">6.59%</span></div>
-    <div class="metric-row"><span class="ml">Avg CPC</span><span class="mv up">$0.21</span></div>
-    <div class="metric-row"><span class="ml">Spend</span><span class="mv">$301.90</span></div>
-    <div class="metric-row"><span class="ml">Conversions (tracked)</span><span class="mv">280</span></div>
-    <div class="metric-row"><span class="ml">Conv. rate</span><span class="mv up">18.86%</span></div>
-    <div class="metric-row"><span class="ml">RPL kit template (17 imp)</span><span class="mv" style="font-size:10px;">5.9% CTR — opportunity</span></div>
-  </div>
-
-  <div class="platform-card" style="grid-column:span 5;background:var(--light);padding:12px 16px;">
-    <div style="font-size:11px;font-weight:700;color:var(--navy);margin-bottom:8px;">LinkedIn Paid Campaign — Website Visits (Apr 1–30)</div>
-    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;font-size:11px;">
-      <div style="background:var(--white);border-radius:6px;padding:10px;"><div style="color:var(--grey);">Total spend</div><div style="font-weight:700;font-size:14px;">$375.26</div></div>
-      <div style="background:var(--white);border-radius:6px;padding:10px;"><div style="color:var(--grey);">Impressions</div><div style="font-weight:700;font-size:14px;">45,234</div></div>
-      <div style="background:var(--white);border-radius:6px;padding:10px;"><div style="color:var(--grey);">Clicks</div><div style="font-weight:700;font-size:14px;">503</div></div>
-      <div style="background:var(--white);border-radius:6px;padding:10px;"><div style="color:var(--grey);">CTR</div><div style="font-weight:700;font-size:14px;">1.11%</div></div>
-      <div style="background:var(--white);border-radius:6px;padding:10px;"><div style="color:var(--grey);">Avg CPC</div><div style="font-weight:700;font-size:14px;">$0.75</div></div>
-    </div>
-    <div style="margin-top:8px;font-size:10px;color:var(--grey);">
-      Best ad: <strong>QMS Essentials</strong> — $225.40 spend · 19,271 imp · 286 clicks · 1.48% CTR &nbsp;|&nbsp;
-      EmpowerU — $51.79 · 77 clicks · 1.31% CTR &nbsp;|&nbsp;
-      VET Foundations — $34.80 · 52 clicks · 0.66% CTR &nbsp;|&nbsp;
-      QMS 2025 — $33.69 · 43 clicks · 0.71% CTR
-    </div>
-  </div>
-
-</div>
-
-<!-- ─── CAMPAIGN BREAKDOWN ─── -->
-<div class="section-title">Campaign Breakdown — April 2026</div>
-<div style="padding:0 32px;">
-  <div style="background:var(--white);border-radius:8px;overflow:hidden;">
-    <table class="dash-table">
-      <thead><tr><th>Campaign</th><th>Channel</th><th>Reach / Imp.</th><th>Clicks / Opens</th><th>Engagement</th><th>Revenue</th><th>Result</th></tr></thead>
-      <tbody>
-        <tr><td><strong>ASQA Performance Assessment post</strong></td><td>LinkedIn</td><td>421 imp</td><td>36 clicks</td><td>10.7% ER</td><td>Indirect — authority</td><td><span class="badge badge-green">Working</span></td></tr>
-        <tr><td><strong>Team history post</strong></td><td>LinkedIn</td><td>325 imp</td><td>33 clicks</td><td>14.5% ER</td><td>Brand/trust</td><td><span class="badge badge-green">Working</span></td></tr>
-        <tr><td>RTO Admins underinvested PD post</td><td>LinkedIn</td><td>296 imp</td><td>15 clicks</td><td>6.4% ER</td><td>AC program awareness</td><td><span class="badge badge-green">Working</span></td></tr>
-        <tr><td>Retreat photos — people content</td><td>LinkedIn</td><td>181 imp</td><td>14 clicks</td><td><strong>16.6% ER — highest</strong></td><td>Brand/people</td><td><span class="badge badge-green">Working</span></td></tr>
-        <tr><td>AC Program intro post</td><td>LinkedIn</td><td>205 imp</td><td>3 clicks</td><td>6.3% ER</td><td>0 enrolments</td><td><span class="badge badge-amber">Steady</span></td></tr>
-        <tr><td>Compliance Compass Newsletter (April)</td><td>Email</td><td>2,206 sent</td><td>25% open / 4% click</td><td>12 sessions</td><td>0 orders</td><td><span class="badge badge-green">Working</span></td></tr>
-        <tr><td>Meet the Faces Behind CWTS</td><td>Email</td><td>1,999 sent</td><td>21% open / 3% click</td><td>34 sessions — best</td><td>0 orders</td><td><span class="badge badge-green">Working</span></td></tr>
-        <tr><td>VET Landscape — Enrol Today</td><td>Email</td><td>2,016 sent</td><td>21% open / 3% click</td><td>22 sessions</td><td>0 orders</td><td><span class="badge badge-amber">Steady</span></td></tr>
-        <tr><td>VET Foundations — Start Strong</td><td>Email</td><td>2,213 sent</td><td>21% open / 2% click</td><td>17 sessions</td><td>0 orders</td><td><span class="badge badge-amber">Steady</span></td></tr>
-        <tr><td>TLI41225 Driver Trainers email</td><td>Email</td><td>2,186 sent</td><td>21% open / 1% click</td><td>6 sessions</td><td>0 orders</td><td><span class="badge badge-red">Underperforming</span></td></tr>
-        <tr><td>ASQA Audit Opening Meeting blog</td><td>Blog + LinkedIn + Email</td><td>~70 views</td><td>Multi-source</td><td>Up to 100% scroll rate</td><td>Indirect — authority</td><td><span class="badge badge-green">Working</span></td></tr>
-        <tr><td><strong>LinkedIn Paid — QMS Essentials ad</strong></td><td>LinkedIn Ads</td><td>19,271 imp · 7,599 reach</td><td>286 clicks</td><td>1.48% CTR · $0.79 CPC</td><td>$225.40 spend — 0 conversions tracked</td><td><span class="badge badge-amber">Steady</span></td></tr>
-        <tr><td>LinkedIn Paid — EmpowerU ad</td><td>LinkedIn Ads</td><td>5,888 imp · 2,874 reach</td><td>77 clicks</td><td>1.31% CTR · $0.67 CPC</td><td>$51.79 spend — 0 conversions tracked</td><td><span class="badge badge-amber">Steady</span></td></tr>
-        <tr><td>LinkedIn Paid — VET Foundations ads (×2)</td><td>LinkedIn Ads</td><td>14,021 imp combined</td><td>97 clicks combined</td><td>~0.69% CTR avg</td><td>$64.38 spend — 0 conversions tracked</td><td><span class="badge badge-red">Underperforming</span></td></tr>
-        <tr><td>Google Ads — Performance Max</td><td>Google Ads</td><td>21,860 imp</td><td>1,441 clicks</td><td>6.59% CTR · 18.86% conv. rate</td><td>2 Wix orders attributed</td><td><span class="badge badge-green">Working</span></td></tr>
-      </tbody>
-    </table>
-  </div>
-</div>
-
-<!-- ─── EMAIL PERFORMANCE ─── -->
-<div class="section-title">Email Campaign Performance — April 2026</div>
-<div style="padding:0 32px;">
-  <div style="background:var(--white);border-radius:8px;overflow:hidden;">
-    <table class="dash-table">
-      <thead><tr><th>Campaign</th><th>Sent</th><th>Open Rate</th><th>Click Rate</th><th>Site Sessions</th><th>Orders</th><th>Result</th></tr></thead>
-      <tbody>
-        <tr><td>Compliance Compass Newsletter (April)</td><td>2,206</td><td style="color:var(--green);font-weight:600;">25%</td><td>4%</td><td>12</td><td>0</td><td><span class="badge badge-green">Working</span></td></tr>
-        <tr><td>Meet the Faces Behind CWTS</td><td>1,999</td><td>21%</td><td>3%</td><td style="color:var(--green);font-weight:600;">34</td><td>0</td><td><span class="badge badge-green">Working</span></td></tr>
-        <tr><td>VET Landscape — Enrol Today</td><td>2,016</td><td>21%</td><td>3%</td><td>22</td><td>0</td><td><span class="badge badge-amber">Steady</span></td></tr>
-        <tr><td>VET Foundations — Start Strong in VET</td><td>2,213</td><td>21%</td><td>2%</td><td>17</td><td>0</td><td><span class="badge badge-amber">Steady</span></td></tr>
-        <tr><td>TLI41225 Driver Trainers — Shift Gears</td><td>2,186</td><td>21%</td><td style="color:var(--red);font-weight:600;">1%</td><td style="color:var(--red);">6</td><td>0</td><td><span class="badge badge-red">Underperforming</span></td></tr>
-      </tbody>
-    </table>
-  </div>
-  <div style="background:#fff8e6;border:1px solid #e8c96a;border-radius:6px;padding:10px 14px;margin-top:10px;font-size:12px;color:#7a5500;line-height:1.55;">
-    <strong>📌 Key insight:</strong> Zero attributed orders across all 5 campaigns this month. Open rates are flat at ~21% (newsletter at 25%). The "Meet the Faces" people-first email drove the most sessions (34) — consistent with the March ADC pattern where human/value content outperforms pure product emails. The TLI41225 "Shift Gears" email at 1% CTR is the weakest send of the month — the hook is not landing for this audience and needs a compliance-problem-first rewrite before it runs again.
-  </div>
-</div>
-
-<!-- ─── SOCIAL POST PERFORMANCE ─── -->
-<div class="section-title">Social Post Performance by Platform — April 2026</div>
-<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;padding:0 32px;">
-  <div class="platform-card">
-    <div class="platform-header"><div class="platform-icon icon-li">in</div><div class="platform-name">LinkedIn — 17 posts</div></div>
-    <div class="metric-row"><span class="ml">Total impressions</span><span class="mv up">2,836</span></div>
-    <div class="metric-row"><span class="ml">Total clicks</span><span class="mv up">148</span></div>
-    <div class="metric-row"><span class="ml">Total interactions</span><span class="mv up">82 reactions</span></div>
-    <div class="metric-row"><span class="ml">Avg engagement rate</span><span class="mv up">8.6%</span></div>
-    <div class="metric-row"><span class="ml">Top post (ER)</span><span class="mv" style="font-size:10px;">Retreat photos — 16.6%</span></div>
-    <div class="metric-row"><span class="ml">Top post (clicks)</span><span class="mv" style="font-size:10px;">ASQA assessment — 36 clicks</span></div>
-    <div class="metric-row"><span class="ml">vs Mar (86 clicks)</span><span class="mv up">▲ +72% — strong improvement</span></div>
-  </div>
-  <div class="platform-card">
-    <div class="platform-header"><div class="platform-icon icon-fb">f</div><div class="platform-name">Facebook</div></div>
-    <div class="metric-row"><span class="ml">Post views</span><span class="mv">1,304</span></div>
-    <div class="metric-row"><span class="ml">Interactions</span><span class="mv up">85</span></div>
-    <div class="metric-row"><span class="ml">Link clicks</span><span class="mv down">2</span></div>
-    <div class="metric-row"><span class="ml">New follows</span><span class="mv">+2</span></div>
-    <div class="metric-row"><span class="ml">Site sessions</span><span class="mv down">~6</span></div>
-    <div class="metric-row"><span class="ml">vs Mar views (5,669)</span><span class="mv down">▼ –77% — reduced effort applied</span></div>
-  </div>
-  <div class="platform-card">
-    <div class="platform-header"><div class="platform-icon icon-ig">ig</div><div class="platform-name">Instagram</div></div>
-    <div class="metric-row"><span class="ml">Post views</span><span class="mv up">462</span></div>
-    <div class="metric-row"><span class="ml">Interactions</span><span class="mv up">29</span></div>
-    <div class="metric-row"><span class="ml">Link clicks</span><span class="mv">0</span></div>
-    <div class="metric-row"><span class="ml">New follows</span><span class="mv">0</span></div>
-    <div class="metric-row"><span class="ml">Site sessions</span><span class="mv">minimal</span></div>
-    <div class="metric-row"><span class="ml">vs Mar views (346)</span><span class="mv up">▲ +34% — gradual improvement</span></div>
-  </div>
-</div>
-<div style="padding:0 32px;margin-top:10px;">
-  <div style="background:#fff8e6;border:1px solid #e8c96a;border-radius:6px;padding:10px 14px;font-size:12px;color:#7a5500;line-height:1.55;">
-    <strong>📌 Key insight:</strong> Facebook and Instagram continue to drive near-zero site sessions and zero orders. LinkedIn is the only social channel producing commercial outcomes for CWTS's audience. Reducing FB/IG to repurpose-only content was the right call. Instagram's 34% view increase is worth monitoring — consistent upward trend without additional effort is a signal to watch.
-  </div>
-</div>
-
-<!-- ─── TOP PERFORMING CONTENT ─── -->
-<div class="section-title">Top Performing Content — April 2026</div>
-<div style="padding:0 32px;">
-  <div style="background:var(--white);border-radius:8px;overflow:hidden;">
-    <table class="dash-table">
-      <thead><tr><th>Content</th><th>Platform</th><th>Impressions</th><th>Clicks</th><th>Engagement</th><th>Note</th></tr></thead>
-      <tbody>
-        <tr><td>Retreat photos — people/team content</td><td>LinkedIn</td><td>181</td><td>14</td><td><strong>16.6%</strong></td><td>Highest ER of month. People-first content consistently outperforms all other formats.</td></tr>
-        <tr><td>Team history post ("for the first time, every one of us...")</td><td>LinkedIn</td><td>325</td><td>33</td><td><strong>14.5%</strong></td><td>Second highest ER. Brand story and team credibility content resonates strongly.</td></tr>
-        <tr><td>ASQA Performance Assessment post</td><td>LinkedIn</td><td>421</td><td>36</td><td><strong>10.7%</strong></td><td>Highest impressions and clicks of month. Timely compliance content with direct audience relevance.</td></tr>
-        <tr><td>ASQA Audit Opening Meeting blog post</td><td>Blog + LinkedIn + Email</td><td>~70 views</td><td>Multi-source</td><td>Up to 100% scroll rate</td><td>Published 5 April — strong read-through across all referral sources. SEO value building.</td></tr>
-        <tr><td>Meet the Faces Behind CWTS email</td><td>Email</td><td>1,999 sent</td><td>21% open / 3% click</td><td><strong>34 site sessions</strong></td><td>Best email for sessions. People/team content works in email as well as social.</td></tr>
-        <tr><td>Compliance Compass Newsletter (April)</td><td>Email</td><td>2,206 sent</td><td><strong>25% open</strong> / 4% click</td><td>12 sessions</td><td>Highest open rate of month. Consistent newsletter performance — audience values this format.</td></tr>
-      </tbody>
-    </table>
-  </div>
-</div>
-
-<!-- ─── MARKETING HOURS ─── -->
-<div class="section-title">Marketing Hours — April 2026 (Teamwork)</div>
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:0 32px;">
-  <div class="hours-card">
-    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;">
-      <div>
-        <div style="font-size:22px;font-weight:700;color:var(--red);">73.5 hrs</div>
-        <div style="font-size:11px;color:var(--grey);margin-top:2px;">vs 20-hour monthly cap</div>
-      </div>
-      <span class="pill pill-red">3.7× over cap</span>
-    </div>
-    <div class="hours-bar-bg"><div class="hours-bar-fill" style="width:100%;background:var(--red);"></div></div>
-    <div style="font-size:10px;color:var(--grey);margin-bottom:12px;">Cap = 20 hrs &nbsp;|&nbsp; Actual = 73.5 hrs &nbsp;|&nbsp; Excess = 53.5 hrs</div>
-    <div class="hours-row"><span>Jess (marketing assets — new)</span><span style="font-weight:600;color:var(--red);">31.3 hrs</span></div>
-    <div class="hours-row"><span>Kai (website / digital)</span><span style="font-weight:600;">19.3 hrs</span></div>
-    <div class="hours-row"><span>Sandra (content / social / analytics)</span><span style="font-weight:600;">11.2 hrs</span></div>
-    <div class="hours-row"><span>Jodie (managerial / review)</span><span style="font-weight:600;">9.3 hrs</span></div>
-    <div class="hours-row"><span>Tracy (newsletter / strategy)</span><span style="font-weight:600;">2.5 hrs</span></div>
-  </div>
-  <div class="hours-card">
-    <div style="font-size:12px;font-weight:700;color:var(--navy);margin-bottom:12px;">Hours by Activity</div>
-    <div class="hours-row"><span>Creation of marketing assets</span><span style="font-weight:600;color:var(--red);">16.6 hrs</span></div>
-    <div class="hours-row"><span>Website maintenance</span><span style="font-weight:600;">6.5 hrs</span></div>
-    <div class="hours-row"><span>Schedule marketing posts</span><span style="font-weight:600;">6.3 hrs</span></div>
-    <div class="hours-row"><span>Wix course page build</span><span style="font-weight:600;">5.5 hrs</span></div>
-    <div class="hours-row"><span>April newsletter</span><span style="font-weight:600;">3.7 hrs</span></div>
-    <div class="hours-row"><span>Review marketing material</span><span style="font-weight:600;">3.5 hrs</span></div>
-    <div class="hours-row"><span>About Us page launch</span><span style="font-weight:600;">3.2 hrs</span></div>
-    <div class="hours-row"><span>Internal meetings</span><span style="font-weight:600;">3.0 hrs</span></div>
-    <div class="hours-row"><span>May 2026 marketing designs</span><span style="font-weight:600;">2.3 hrs</span></div>
-    <div class="hours-row"><span>Employee profiles / Claude work</span><span style="font-weight:600;">1.8 hrs</span></div>
-  </div>
-</div>
-
-<!-- ─── MC ANALYSIS ─── -->
-<div class="section-title">MC Analysis &amp; Recommendations — May 2026</div>
-<div style="padding:0 32px 24px;">
-  <div class="analysis-box">
-    <h3>Strategic Summary — April 2026</h3>
-
-    <p><strong>April tells a clearer story than March.</strong> On an accrual basis — work done in April including May 1 invoices — total revenue was $73,234, representing 84% of the $87,500 monthly pace required to hit $1,050,000 for FY2027. Cash received was $70,659. The gap between accrual and cash ($2,575) reflects invoices issued on 1 May for April work, which will land in May's Xero figures. March's $99,133 cash figure was inflated by a large settlement — April is a more representative read of the baseline. Consulting at $72,550 accrual is solid but still below pace, and without a large one-off transaction, product and course revenue needs to start pulling its weight.</p>
-
-    <p>Product and course revenue in April was negligible on a sold basis: Wix shop $365, Vetr sold $280, aXcelerate $36. Five email campaigns sent, zero attributed orders for the second consecutive month. LinkedIn ran both organically and as a paid channel in April — organic content drove 2,836 impressions and 148 clicks at a strong 8.6% engagement rate, while the paid website visits campaign added 45,234 impressions and 503 clicks at $375.26 spend ($0.75 CPC). The QMS Essentials ad was the strongest paid creative at 1.48% CTR, absorbing 60% of the budget. Despite the combined paid and organic reach, no attributed conversions were recorded from LinkedIn in April. The audience is engaged and clicking — the gap is on the landing page and product page conversion side. <strong>Update as of 1 May:</strong> AC1 (The VET Landscape) is now live. The remaining AC2–AC12 units are in accelerated production with an offshore contractor. The EOFY sale (35% off everything, opening 1 June) includes AC1 and a full series pre-sale — this is the first real course enrolment opportunity for the coaching program.</p>
-
-    <p>One flag requires resolution before May spend is committed: the Xero Promotions and Advertising line shows $1,514.24 for April. Google Ads ($301.90) and LinkedIn Ads ($375.26) account for $677.16 — the remaining ~$837 is unidentified and likely includes platform subscriptions coded to this line. Clarify before May budget is finalised. On hours: the 73.5 hours logged in April is a one-off. Jess and Sandra completed a full-year marketing asset build this month — all written content, digital creatives, email campaigns, and templates planned and produced for the year ahead. This is a significant front-loaded investment that should substantially reduce the hours required in forward months. From May onward, the 20-hour monthly cap should be achievable.</p>
-
-    <div style="background:#eaf5ef;border:1px solid #a8ddc0;border-radius:6px;padding:12px 16px;margin-top:12px;font-size:12px;color:#1a5c35;line-height:1.55;">
-      <strong>✓ AC1 Now Live</strong> — The VET Landscape (AC1) launched in May 2026. Remaining units AC2–AC12 are in accelerated production with an offshore contractor. The EOFY sale (1 June, 35% off everything including AC1 and full series pre-sale) creates an immediate enrolment opportunity. Warm-up email sequence must go Week 3 of May.
-    </div>
-
-    <div style="margin-top:18px;margin-bottom:10px;font-size:12px;font-weight:700;color:var(--purple);text-transform:uppercase;letter-spacing:0.8px;">May Action Plan</div>
-    <ul class="action-list">
-      <li><strong>Launch the AC1 email and LinkedIn announcement this week.</strong> AC1 (The VET Landscape) is live. Brief the launch campaign immediately — do not wait for AC2. Lead with "Unit 1 is open now" + EOFY hook (35% off, tax deductible, enrol before 30 June). Include a waitlist CTA for the full series. AC2–AC12 are in production with an offshore contractor.</li>
-      <li><strong>Brief and schedule the EOFY warm-up email for Week 3 of May.</strong> Subject direction: "EOFY is 3 weeks away — is your RTO's QMS current?" Link to QMS policy packs. Include course enrolments CTA. Tax deductible angle. This is the pipeline for the June sale.</li>
-      <li><strong>Identify the remaining ~$837 in the Xero Promotions and Advertising line.</strong> Google Ads ($302) + LinkedIn Ads ($375) = $677 confirmed. The remaining $837 is unaccounted for — likely platform subscriptions (Canva, Wix premium features, or similar) coded to this line. Clarify before May budget is finalised.</li>
-      <li><strong>Rewrite the TLI41225 email before it runs again.</strong> The "Shift Gears" angle produced 1% CTR from 2,186 sends. Lead with the compliance problem: "Qualifying driver trainers is more complex than most RTOs realise — here's what you need." Then link to TLI41225 resources.</li>
-      <li><strong>Hold the line on hours from May onward.</strong> The April investment in a full-year asset build was justified — Jess and Sandra have done the heavy lifting. The 20-hour monthly cap should now be achievable going forward. Any development tasks (course pages, website builds) must still be logged under CWTS Internal, not marketing.</li>
-    </ul>
-  </div>
-</div>
-
-<!-- ─── MAY FOCUS ─── -->
-<div class="section-title">May 2026 — Marketing Focus &amp; Execution Plan</div>
-<div style="padding:0 32px 8px;">
-
-  <div style="background:var(--navy);border-radius:8px;padding:18px 24px;margin-bottom:12px;display:flex;align-items:center;gap:16px;">
-    <div style="font-size:28px;">🎯</div>
-    <div>
-      <div style="color:#fff;font-size:14px;font-weight:700;margin-bottom:4px;">May Objective — Launch and Prime for EOFY</div>
-      <div style="color:#c0c8e8;font-size:13px;line-height:1.5;">May has two jobs: launch the AC/CC program and warm the list for the EOFY sale that opens 1 June. Every activity this month must serve one of those two outcomes. There is no room for campaigns that do neither.</div>
-    </div>
-  </div>
-
-  <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--grey);margin:16px 0 8px;">What to Promote</div>
-  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:12px;">
-    <div class="may-card">
-      <div style="font-size:10px;font-weight:700;text-transform:uppercase;color:var(--green);letter-spacing:0.8px;margin-bottom:6px;">Priority 1 — AC1 Live ✓</div>
-      <div style="font-size:13px;font-weight:700;color:var(--navy);margin-bottom:4px;">AC1 Launch Campaign</div>
-      <div style="font-size:11px;color:var(--grey);line-height:1.5;">AC1 (VET Landscape) is live. Launch email + LinkedIn this week. EOFY angle: 35% off, tax deductible. Waitlist CTA for full series. AC2–AC12 in production.</div>
-    </div>
-    <div class="may-card" style="border-top-color:var(--teal);">
-      <div style="font-size:10px;font-weight:700;text-transform:uppercase;color:var(--teal);letter-spacing:0.8px;margin-bottom:6px;">Priority 2</div>
-      <div style="font-size:13px;font-weight:700;color:var(--navy);margin-bottom:4px;">EOFY Warm-Up (Wk 3)</div>
-      <div style="font-size:11px;color:var(--grey);line-height:1.5;">35% off full catalogue from 1 June. Tax deductible. Begin warming the list now — do not wait for June.</div>
-    </div>
-    <div class="may-card" style="border-top-color:var(--navy);">
-      <div style="font-size:10px;font-weight:700;text-transform:uppercase;color:var(--navy);letter-spacing:0.8px;margin-bottom:6px;">Priority 3</div>
-      <div style="font-size:13px;font-weight:700;color:var(--navy);margin-bottom:4px;">QMS Policy Packs</div>
-      <div style="font-size:11px;color:var(--grey);line-height:1.5;">Push $150–$500 basket items. "Get compliant before 30 June" is a real and timely hook for RTO decision-makers.</div>
-    </div>
-    <div class="may-card" style="border-top-color:var(--grey);">
-      <div style="font-size:10px;font-weight:700;text-transform:uppercase;color:var(--grey);letter-spacing:0.8px;margin-bottom:6px;">Priority 4</div>
-      <div style="font-size:13px;font-weight:700;color:var(--navy);margin-bottom:4px;">QI Data Reminder</div>
-      <div style="font-size:11px;color:var(--grey);line-height:1.5;">Quality Indicator data submission approaching. Compliance content opportunity — link to audit prep products.</div>
-    </div>
-  </div>
-
-  <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--grey);margin:16px 0 8px;">Week by Week</div>
-  <div style="background:var(--white);border-radius:8px;overflow:hidden;margin-bottom:12px;">
-    <table class="dash-table">
-      <thead><tr><th>Week</th><th>Email</th><th>LinkedIn</th><th>Google Ads</th><th>Paid Social</th></tr></thead>
-      <tbody>
-        <tr><td><strong>Week 1</strong></td><td>AC1 launch email (live now + EOFY 35% off angle) → reissue day 5</td><td>AC1 launch post + EOFY preview + compliance thought leadership ×2</td><td>Add AC program keywords — maintain $302 base</td><td>$200 LinkedIn boost on AC1 launch post</td></tr>
-        <tr><td><strong>Week 2</strong></td><td>QMS Policy Pack product email → reissue day 5</td><td>QMS/EOFY angle + thought leadership ×2 + team profile post</td><td>Monitor</td><td>Off</td></tr>
-        <tr><td><strong>Week 3</strong></td><td>EOFY warm-up email → reissue day 5</td><td>EOFY preview post + thought leadership ×2 + QI data reminder post</td><td>Begin EOFY keyword prep</td><td>Off</td></tr>
-        <tr><td><strong>Week 4</strong></td><td>Compliance Compass Newsletter (May) → reissue day 5</td><td>EOFY reminder + thought leadership ×2 + team profile post</td><td>Monitor</td><td>Off</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
-    <div style="background:var(--white);border-radius:8px;padding:16px;">
-      <div style="font-size:12px;font-weight:700;color:var(--navy);margin-bottom:10px;">Extra Budget — May</div>
-      <div class="hours-row"><span>LinkedIn paid boost (AC/CC launch)</span><span style="font-weight:600;color:var(--teal);">$200</span></div>
-      <div class="hours-row"><span>Google Ads — maintain base spend</span><span style="font-weight:600;color:var(--teal);">~$302</span></div>
-      <div class="hours-row"><span>Facebook / Instagram boost</span><span style="font-weight:600;color:var(--red);">$0</span></div>
-      <div class="hours-row" style="border-top:2px solid var(--mid);margin-top:4px;padding-top:8px;"><span style="font-weight:700;">Total extra approved spend</span><span style="font-weight:700;color:var(--teal);">~$200</span></div>
-      <div style="font-size:11px;color:var(--grey);margin-top:8px;">Resolve the $1,212 unexplained Xero ad spend before committing additional budget.</div>
-    </div>
-    <div style="background:var(--white);border-radius:8px;padding:16px;">
-      <div style="font-size:12px;font-weight:700;color:var(--navy);margin-bottom:10px;">Hours Priority Order (20 hr cap)</div>
-      <div class="hours-row"><span>1. AC/CC launch email + posts</span><span style="font-weight:600;">~5 hrs</span></div>
-      <div class="hours-row"><span>2. EOFY warm-up email build</span><span style="font-weight:600;">~4 hrs</span></div>
-      <div class="hours-row"><span>3. LinkedIn content + scheduling</span><span style="font-weight:600;">~5 hrs</span></div>
-      <div class="hours-row"><span>4. May newsletter build</span><span style="font-weight:600;">~4 hrs</span></div>
-      <div class="hours-row"><span>5. Analytics + reporting</span><span style="font-weight:600;">~2 hrs</span></div>
-      <div style="font-size:11px;color:var(--grey);margin-top:8px;">Full-year asset library now built. May hours should be execution-only — deploy the templates and campaigns already created. Development tasks still go under CWTS Internal.</div>
-    </div>
-  </div>
-
-  <div class="eofy-banner">
-    <div style="font-size:28px;">📅</div>
-    <div>
-      <div style="color:#fff;font-size:14px;font-weight:700;margin-bottom:3px;">EOFY Sale opens 1 June — 31 days away.</div>
-      <div style="color:#e8c8e8;font-size:12px;line-height:1.5;">Full catalogue 35% off. 3-email sequence: announce → reminder → last chance. Tax deductible angle. Course enrolments for July start. Warm-up begins Week 3 of May — if it doesn't start then, the pipeline won't be ready for 1 June.</div>
-    </div>
-  </div>
-
-</div>
-
-<div class="footer">
-  Coast Wide Training Solutions Pty Ltd &nbsp;·&nbsp; ABN 71 674 767 447 &nbsp;·&nbsp; www.coastwidetraining.com.au &nbsp;·&nbsp;
-  MC Marketing Dashboard &nbsp;·&nbsp; April 2026 &nbsp;·&nbsp;
-  <em>This report is an internal working document. MC analysis must be reviewed by a team member before external distribution.</em>
-</div>
-
 </body>
 </html>
