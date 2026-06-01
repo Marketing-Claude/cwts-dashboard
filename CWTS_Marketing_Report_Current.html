@@ -28,6 +28,8 @@
   .card.amber{border-top-color:var(--amber)}
   .card.red{border-top-color:var(--red)}
   .card.nodata{border-top-color:var(--nodata)}
+  .card.neutral{border-top-color:var(--navy)}
+  .s-neutral{background:var(--navy)}
   .card .label{font-size:12px;color:var(--grey);text-transform:uppercase;letter-spacing:.5px;font-weight:bold}
   .card .val{font-size:25px;font-weight:bold;margin:6px 0 2px}
   .card .target{font-size:12px;color:var(--grey)}
@@ -73,11 +75,11 @@ const DATA = {
     wixShop:   { actual:572,    target:11667, prior:null,  label:"Wix Shop Sales",      unit:"$", note:"6 orders (1 was $0 coupon). Pre-EOFY holding month." },
     vetr:      { actual:171.50, target:1250,  prior:null,  label:"Partnerships / Vetr", unit:"$", note:"1 RCTI: Third Party Management Pack. Sold value; cash basis may differ." },
     courses:   { actual:202.68, target:6667,  prior:null,  label:"Course Enrolments",   unit:"$", note:"3 aXcelerate enrolments (low-ticket). Excludes any non-invoiced." },
-    consulting:{ actual:null,   target:null,  prior:null,  label:"Consulting",          unit:"$", note:"At capacity. Xero Sales line not split by stream — see analysis." },
+    consulting:{ actual:91865,  target:null,  prior:null,  label:"Consulting (derived)",  unit:"$", note:"Approximate. Accrual Sales less Wix, Vetr and course enrolments. At capacity." },
 
     linkedinSpend:{ actual:260.39, target:null, prior:314.97, label:"LinkedIn Ad Spend", unit:"$", note:"Sponsored 'Website Visits' ad set." },
     googleSpend:  { actual:299.48, target:280,  prior:null,   label:"Google Ads Spend",  unit:"$", note:"Near monthly cap. 88% on mobile, via PMax." },
-    marketingHrs: { actual:null,   target:20,   prior:null,   label:"Marketing Hours",   unit:"h", note:"From Teamwork — confirm marketing-tagged total before finalising." },
+    marketingHrs: { actual:30.68, target:20,   prior:null,   label:"Marketing Hours",   unit:"h", note:"Recurring marketing work from 18 May. Includes June EOFY prep done in May, so reads as ~6 weeks of content work. June hours should fall under cap." },
     totalRev:     { actual:92811, target:87500, prior:null,   label:"Total Revenue (accrual)", unit:"$", note:"Xero Sales line, accrual. Cash basis $76,660. Mostly consulting." }
   },
 
@@ -118,7 +120,8 @@ const DATA = {
 /* ---------- render ---------- */
 function money(v){ return v==null?"—":"$"+Number(v).toLocaleString("en-AU",{maximumFractionDigits:0}); }
 function statusFor(a,t){
-  if(a==null||t==null) return ["nodata","No data / N/A"];
+  if(a==null) return ["nodata","No data / N/A"];
+  if(t==null) return ["neutral","Tracked"];
   const p=a/t;
   if(p>=0.85) return ["green","On track"];
   if(p>=0.5)  return ["amber","Monitor"];
@@ -211,7 +214,7 @@ document.write(`
     <li><b>Scale what's already working at zero cost.</b> LinkedIn organic is the standout channel. Keep Jodie's compliance-led posts running Mon/Wed/Fri through June, each linking to a shop or course page, and personalise the 26 June Meet the Team placeholder before scheduling. Owner: Jodie/Tracy to personalise, Jess to schedule.</li>
   </ol>
 
-  <p class="note">This written analysis is a strategic brief and must be reviewed by a CWTS team member before the report is shared externally. Course enrolment figure reflects three aXcelerate invoices; Xero cash basis will reconcile timing. Marketing hours card is pending confirmation of the marketing-tagged total from the Teamwork report. Google Search Console remains unconnected (Section 13.7) — organic reporting is limited to the GSC query export until it is linked.</p>
+  <p class="note">This written analysis is a strategic brief and must be reviewed by a CWTS team member before the report is shared externally. Course enrolment figure reflects three aXcelerate invoices; Xero cash basis will reconcile timing. Marketing hours reflect recurring work from 18 May onward (foundational one-off setup earlier in the month excluded) and include June EOFY prep completed in May. Consulting is derived (accrual Sales less the three tracked streams) and approximate. Google Search Console remains unconnected (Section 13.7) — organic reporting is limited to the GSC query export until it is linked.</p>
 </div>
 
 <div class="footer">Coast Wide Training Solutions Pty Ltd · MC Monthly Marketing Dashboard · ${DATA.period} · Internal — review before external distribution</div>
