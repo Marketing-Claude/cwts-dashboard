@@ -20,7 +20,7 @@
   .gen{font-size:12px;opacity:.8;margin-top:8px}
   h2{font-size:17px;color:var(--purple);margin:26px 0 12px;padding-bottom:6px;border-bottom:2px solid var(--line)}
   .grid{display:grid;gap:14px}
-  .kpis{grid-template-columns:repeat(4,1fr)}
+  .kpis{grid-template-columns:repeat(3,1fr)}
   @media(max-width:900px){.kpis{grid-template-columns:repeat(2,1fr)}}
   @media(max-width:520px){.kpis{grid-template-columns:1fr}}
   .card{background:var(--card);border-radius:9px;padding:16px 16px 14px;border:1px solid var(--line);border-top:4px solid var(--grey)}
@@ -75,12 +75,11 @@ const DATA = {
     wixShop:   { actual:572,    target:11667, prior:null,  label:"Wix Shop Sales",      unit:"$", note:"6 orders (1 was $0 coupon). Pre-EOFY holding month." },
     vetr:      { actual:171.50, target:1250,  prior:null,  label:"Partnerships / Vetr", unit:"$", note:"1 RCTI: Third Party Management Pack. Sold value; cash basis may differ." },
     courses:   { actual:202.68, target:6667,  prior:null,  label:"Course Enrolments",   unit:"$", note:"3 aXcelerate enrolments (low-ticket). Excludes any non-invoiced." },
-    consulting:{ actual:91865,  target:null,  prior:null,  label:"Consulting (derived)",  unit:"$", note:"Approximate. Accrual Sales less Wix, Vetr and course enrolments. At capacity." },
+    /* consulting and total revenue intentionally omitted from this team-visible dashboard — tracked privately */
 
     linkedinSpend:{ actual:260.39, target:null, prior:314.97, label:"LinkedIn Ad Spend", unit:"$", note:"Sponsored 'Website Visits' ad set." },
     googleSpend:  { actual:299.48, target:280,  prior:null,   label:"Google Ads Spend",  unit:"$", note:"Near monthly cap. 88% on mobile, via PMax." },
-    marketingHrs: { actual:30.68, target:20,   prior:null,   label:"Marketing Hours",   unit:"h", note:"Recurring marketing work from 18 May. Includes June EOFY prep done in May, so reads as ~6 weeks of content work. June hours should fall under cap." },
-    totalRev:     { actual:92811, target:87500, prior:null,   label:"Total Revenue (accrual)", unit:"$", note:"Xero Sales line, accrual. Cash basis $76,660. Mostly consulting." }
+    marketingHrs: { actual:30.68, target:20,   prior:null,   label:"Marketing Hours",   unit:"h", note:"Recurring marketing work from 18 May. Includes June EOFY prep done in May, so reads as ~6 weeks of content work. June hours should fall under cap." }
   },
 
   platforms: {
@@ -169,13 +168,11 @@ document.write(`
   ${kpiCard(DATA.kpis.wixShop,true)}
   ${kpiCard(DATA.kpis.vetr,true)}
   ${kpiCard(DATA.kpis.courses,true)}
-  ${kpiCard(DATA.kpis.consulting,false)}
 </div>
 <div class="grid kpis" style="margin-top:14px">
   ${kpiCard(DATA.kpis.linkedinSpend,false)}
   ${kpiCard(DATA.kpis.googleSpend,true)}
   ${kpiCard(DATA.kpis.marketingHrs,true)}
-  ${kpiCard(DATA.kpis.totalRev,false)}
 </div>
 <div class="note">Monthly pace = FY2027 annual target ÷ 12. Wix $140k, Vetr $15k, Courses $80k. The &gt;15% below-target rule flags all three product/course streams as Review for May — expected in a deliberate pre-EOFY no-discount month, but recorded honestly.</div>
 
@@ -214,7 +211,7 @@ document.write(`
     <li><b>Scale what's already working at zero cost.</b> LinkedIn organic is the standout channel. Keep Jodie's compliance-led posts running Mon/Wed/Fri through June, each linking to a shop or course page, and personalise the 26 June Meet the Team placeholder before scheduling. Owner: Jodie/Tracy to personalise, Jess to schedule.</li>
   </ol>
 
-  <p class="note">This written analysis is a strategic brief and must be reviewed by a CWTS team member before the report is shared externally. Course enrolment figure reflects three aXcelerate invoices; Xero cash basis will reconcile timing. Marketing hours reflect recurring work from 18 May onward (foundational one-off setup earlier in the month excluded) and include June EOFY prep completed in May. Consulting is derived (accrual Sales less the three tracked streams) and approximate. Google Search Console remains unconnected (Section 13.7) — organic reporting is limited to the GSC query export until it is linked.</p>
+  <p class="note">This written analysis is a strategic brief and must be reviewed by a CWTS team member before the report is shared externally. Course enrolment figure reflects three aXcelerate invoices; Xero cash basis will reconcile timing. Marketing hours reflect recurring work from 18 May onward (foundational one-off setup earlier in the month excluded) and include June EOFY prep completed in May. Google Search Console remains unconnected (Section 13.7) — organic reporting is limited to the GSC query export until it is linked.</p>
 </div>
 
 <div class="footer">Coast Wide Training Solutions Pty Ltd · MC Monthly Marketing Dashboard · ${DATA.period} · Internal — review before external distribution</div>
